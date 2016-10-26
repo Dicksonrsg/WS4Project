@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core" 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui" 
+      template="/templates/template.xhtml">
+    
+    <ui:define name="titulo" >Professor</ui:define>
+    
+    <ui:define name="conteudo">
+        
+        <p:tabView>
+            
+            <p:tab title="Cadastrar">
+                
+                <h:form>
+                    
+                    <p:panelGrid>
+                        
+                        <h:inputHidden value="#{teacherMBean.tea.id}" />
+                        
+                        <p:outputLabel value="Nome:" />
+                        <br/>
+                        <p:inputText value="#{teacherMBean.tea.name}" 
+                            requiredMessage="Campo nome obrigatório" 
+                            validatorMessage="Campo nome não pode passar de 70 caracteres"
+                            size="50"
+                        >
+                            <f:validateLength maximum="70" />
+                        </p:inputText>
+                        <br/>
+                        <p:outputLabel value="Matricula:" />
+                        <br/>
+                        <p:inputMask 
+                            value="#{teacherMBean.tea.rg}" 
+                            requiredMessage="Campo Matricula obrigatório"
+                            validatorMessage="Campo matricula não pode ser vazio"
+                            mask="9999"
+                        >
+                        </p:inputMask>
+                        <br/>
+                        <br/>
+				        <p:outputLabel for="idioma" value="Idioma:" />
+				        <p:selectOneMenu id="idioma" value="#{teacherMBean.tea.langauge}" style="width:125px">
+				            <f:selectItem itemLabel="Select One" itemValue="" />
+				            <f:selectItem itemLabel="Inglês" itemValue="english" />
+				            <f:selectItem itemLabel="Espanhol" itemValue="spanish" />
+				            <f:selectItem itemLabel="Italiano" itemValue="italian" />
+				            <f:selectItem itemLabel="Alemão" itemValue="german" />
+				        </p:selectOneMenu>
+                        <br/>
+                       <p:outputLabel value="Telefone:" />
+                        <br/>                       
+                        <p:inputMask 
+                            value="#{teacherMBean.tea.phone}" 
+                            mask="(99)9999-9999"
+                        >
+                        </p:inputMask>
+                        <br/>
+                        <h:outputText id="display" />
+                        <br/>
+                        <p:commandButton value="SALVAR" icon="ui-icon-mail-closed" ajax="false" action="#{teacherMBean.save()}" />
+                        
+                    </p:panelGrid>
+                    
+                </h:form>
+                
+            </p:tab>
+            
+            <p:tab title="Lista de Professores">
+                
+                <h:form>
+                    
+                    <p:dataTable var="teacher" value="#{teacherMBean.listAll}" scrollable="true" scrollHeight="300" style="width: 99%;">
+                    
+                        <p:column headerText="Id" footerText="Id" style="width: 10%;">
+                            <h:outputText value="#{teacher.id}" />
+                        </p:column>
+
+                        <p:column headerText="Nome" footerText="Nome" sortBy=""  style="width: 40%;">
+                            <h:outputText value="#{teacher.name}" />
+                        </p:column>
+
+                        <p:column headerText="Matricula" footerText="Matricula"  style="width: 20%;">
+                            <h:outputText value="#{teacher.rg}" />
+                        </p:column>
+                        <p:column headerText="Idioma" footerText="Telefone"  style="width: 20%;">
+                            <h:outputText  value="#{teacher.langauge}" />
+                        </p:column>
+                        <p:column headerText="Idioma" footerText="Telefone"  style="width: 20%;">
+                            <h:outputText  value="#{teacher.phone}" />
+                        </p:column>                        
+                        <p:column headerText="Ação" footerText="Ação" style="width: 10%; text-align: center;">
+                            <p:commandButton icon="ui-icon-search" ajax="false" action="#{teacherMBean.select(teacher)}" />
+                            <p:commandButton icon="ui-icon-trash" ajax="false" action="#{teacherMBean.delete(teacher)}" onclick="return confirm('Excluir #{teacher.name} ?')"/>   
+                        </p:column>
+                    
+                    </p:dataTable>
+                    
+                </h:form>
+                
+            </p:tab>
+            
+        </p:tabView>
+        
+    </ui:define>
+
+</ui:composition>

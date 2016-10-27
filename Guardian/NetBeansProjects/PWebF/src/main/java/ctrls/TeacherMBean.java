@@ -34,35 +34,35 @@ public class TeacherMBean extends AbstractCtrl<Teacher> {
     public String save(){
         TeacherDAO tdao = new TeacherDAO();	
         try{
-                if(tea.getId() == 0){
-                    tdao.create(tea);
-                    tea = new Teacher();
-                } else{
-                        tdao.update(tea);
-                }			
+            if(tea.getId() == 0){
+                tdao.create(tea);
+                tea = new Teacher();
+            } else{
+                tdao.update(tea);
+            }			
         }finally{
-                tdao.close();
+            tdao.close();
         }
         return null;
     }
 	
-	public String select(Teacher tea){
-		this.tea = tea;
-		return null;
-	}
-	
-	public String delete(Teacher tea){
-		TeacherDAO tdao = new TeacherDAO();
-		try{
-			tdao.delete(tea);
-		}finally{
-			tdao.close();
-		}
-		return null;
-	}
-	
-	public Teacher findByRG(int rg){
-		TeacherDAO tdao = new TeacherDAO();
-		return tdao.findByRG(rg);
-	}
+    public String select(Teacher tea){
+            this.tea = tea;
+            return null;
+    }
+
+    public String delete(Teacher tea){
+            TeacherDAO tdao = new TeacherDAO();
+            try{
+                    tdao.delete(tea);
+            }finally{
+                    tdao.close();
+            }
+            return null;
+    }
+
+    public Teacher findByRG(int rg){
+            TeacherDAO tdao = new TeacherDAO();
+            return tdao.findByRG(rg);
+    }
 }

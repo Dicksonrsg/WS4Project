@@ -103,6 +103,20 @@
                 </h:form>
                 
             </p:tab>
+            <p:tab title="Temp tab for shifts">
+                <h:form>
+                    <p:panelGrid>
+                        <h:inputHidden value="#{shiftMBean.shi.id}" />
+                        <p:outputLabel value="Shift:" />
+                        <br/>
+                        <p:inputText value="#{shiftMBean.shi.group}" size="30"/>
+                        <br/>
+                        <h:outputText id="display" />
+                        <br/>
+                        <p:commandButton value="SALVAR" icon="ui-icon-disk" ajax="false" action="#{shiftMBean.save()}"/>
+                    </p:panelGrid>
+                </h:form>
+            </p:tab>
             
         </p:tabView>
         

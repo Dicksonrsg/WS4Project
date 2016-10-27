@@ -4,22 +4,22 @@ import dao.DayDAO;
 import dao.ShiftDAO;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import model.Days;
+import model.Day;
 import model.Shift;
 
 @ManagedBean
 public class DayMBean {
-    private Days d = new Days();
+    private Day d = new Day();
     
-    public Days getDays(){
+    public Day getDays(){
         return d;
     }
     
-    public void setDays(Days d){
+    public void setDays(Day d){
         this.d = d;
     }
     
-    public List<Days> getListFull(){
+    public List<Day> getListFull(){
         DayDAO ddao = new DayDAO();
         try{
             return ddao.findAll();
@@ -55,7 +55,7 @@ public class DayMBean {
             if(d.getId() == 0){
                 d.setShifts(shiftz);
                 ddao.create(d);
-                d = new Days();
+                d = new Day();
             }else{
                 ddao.update(d);
             }
@@ -66,12 +66,12 @@ public class DayMBean {
         return null;
     }
     
-    public String select(Days d){
+    public String select(Day d){
         this.d = d;
         return null;
     }
     
-    public String delete(Days d){
+    public String delete(Day d){
         DayDAO ddao = new DayDAO();
         try{
             ddao.delete(d);

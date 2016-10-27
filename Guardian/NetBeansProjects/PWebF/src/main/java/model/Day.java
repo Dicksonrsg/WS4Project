@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity(name = "tb_days")
-public class Days implements PersistDB{
+public class Day implements PersistDB{
     
     @Id
     @GeneratedValue
@@ -22,10 +22,10 @@ public class Days implements PersistDB{
     @JoinColumn(name = "day_shi_id")
     private List<Shift> shifts;
 
-    public Days() {
+    public Day() {
     }
 
-    public Days(int id, String name, List<Shift> shifts) {
+    public Day(int id, String name, List<Shift> shifts) {
         this.id = id;
         this.name = name;
         this.shifts = shifts;

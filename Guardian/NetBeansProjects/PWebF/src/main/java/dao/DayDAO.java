@@ -1,12 +1,12 @@
 package dao;
 
-import model.Days;
+import model.Day;
 
-public class DayDAO extends GenericDAO<Days> {
+public class DayDAO extends GenericDAO<Day> {
 
     @Override
-    public Class<Days> getClassType() {
-        return Days.class;
+    public Class<Day> getClassType() {
+        return Day.class;
     }
     
 }

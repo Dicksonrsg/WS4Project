@@ -18,7 +18,7 @@ public class Available implements PersistDB{
     private int id;
     @OneToMany
     @JoinColumn(name = "ava_day_id")
-    private List<Days> days;
+    private List<Day> days;
     @OneToOne
     @JoinColumn(name = "ava_tea_id")
     private Teacher teacher;
@@ -26,7 +26,7 @@ public class Available implements PersistDB{
     public Available() {
     }
 
-    public Available(int id, List<Days> days, Teacher teacher) {
+    public Available(int id, List<Day> days, Teacher teacher) {
         this.id = id;
         this.days = days;
         this.teacher = teacher;
@@ -40,11 +40,11 @@ public class Available implements PersistDB{
         this.id = id;
     }
 
-    public List<Days> getDays() {
+    public List<Day> getDays() {
         return days;
     }
 
-    public void setDays(List<Days> days) {
+    public void setDays(List<Day> days) {
         this.days = days;
     }
 

@@ -16,21 +16,46 @@
             <p:tab title="Cadastrar">
             
                 <h:form>
+                    
+                    <p:panel>
+                        <p:panelGrid>
+                        <p:selectManyCheckbox value="#{availableMBean.dayz}" layout="pageDirection">
+                                <f:selectItem itemLabel="Segunda-Feira" itemValue="Segunda"></f:selectItem>    
+                                
+                                                            </p:selectManyCheckbox>    
+                            </p:panelGrid>
+                        <p:panelGrid>
 
-                    <p:panelGrid>
+                            <p:selectManyButton value="#{dayMBean.selectedShiftz}" >
+
+                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.id}" />
+
+                            </p:selectManyButton> 
+                            <p:commandButton value="Adicionar dia" action="#{dayMBean.addMF}" icon="ui-icon-plus" ajax="false" />
+                            <br/>
+                            <p:commandButton value="SALVAR" action="#{dayMBean.save}" icon="ui-icon-disk" ajax="false" />
+
+                        </p:panelGrid>
+                        <p:separator/>
+                        <p:panelGrid>
+                        <p:selectManyButton value="#{dayMBean.selectedShiftz}" >
+                                <f:selectItem itemLabel="Terça-Feira" itemValue="Segunda"></f:selectItem> 
+                                </p:selectManyButton>
+                            </p:panelGrid>
+                        <p:panelGrid>
+
+                            <p:selectManyButton value="#{dayMBean.selectedShiftz}" >
+
+                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.id}" />
+
+                            </p:selectManyButton> 
+                            <p:commandButton value="Adicionar dia" action="#{dayMBean.addMF}" icon="ui-icon-plus" ajax="false" />
+                            <br/>
+                            <p:commandButton value="SALVAR" action="#{dayMBean.save}" icon="ui-icon-disk" ajax="false" />
+                            </p:panelGrid>                     
                         
-                        <h:outputText value="Segunda:"/>
-                        
-                        <f:selectItem itemLabel="Segunda" itemValue="segunda" value="#{dayMBean.day.name}" />
-                        <p:selectManyButton value="#{dayMBean.shiftz}" >
-                            
-                            <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.id}" />
-                            
-                        </p:selectManyButton> 
-                        <p:commandButton value="SALVAR" action="#{dayMBean.save}" icon="ui-icon-disk" ajax="false" />
-
-                    </p:panelGrid>
-
+                    </p:panel>
+                                          
                 </h:form>
                 
             </p:tab>

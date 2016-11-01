@@ -6,6 +6,7 @@
     <class>model.Teacher</class>
     <class>model.Shift</class>
     <class>model.Day</class>
+    <class>model.Soldier</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_projectweb"/>

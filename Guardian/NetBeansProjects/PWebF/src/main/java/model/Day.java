@@ -1,6 +1,7 @@
 package model;
 
 import dao.PersistDB;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity(name = "tb_days")
-public class Day implements PersistDB{
+public class Day implements PersistDB, Serializable{
     
     @Id
     @GeneratedValue
@@ -31,10 +32,12 @@ public class Day implements PersistDB{
         this.shifts = shifts;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }

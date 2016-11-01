@@ -57,7 +57,7 @@ public abstract class GenericDAO <T extends PersistDB>{
 		change(c, OperacaoDatabase.REMOVER);
 	}
 	
-	public T findByPK(Long id){
+	public T findByPK(int id){
 		EntityManager em = getEm();
 		T c = em.find(getClassType(), id);
 		return c;

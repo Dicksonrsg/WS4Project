@@ -2,14 +2,19 @@ package ctrls;
 
 import dao.DayDAO;
 import dao.ShiftDAO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import model.Day;
 import model.Shift;
 
-@ManagedBean
+@ManagedBean(name = "dayMBean")
+@ViewScoped
 public class DayMBean {
     private Day d = new Day();
+    private Shift shi = new Shift();
+    private List<Shift> shiftz ;
     
     public Day getDays(){
         return d;
@@ -18,6 +23,14 @@ public class DayMBean {
     public void setDays(Day d){
         this.d = d;
     }
+    
+    public Shift getShi() {
+        return shi;
+    }
+
+    public void setShi(Shift shi) {
+        this.shi = shi;
+    }    
     
     public List<Day> getListFull(){
         DayDAO ddao = new DayDAO();
@@ -39,13 +52,11 @@ public class DayMBean {
     
     /* think on how you're loading the shiftz list with shifts*/
 
-    private List<Shift> shiftz;
-    
-    public List<Shift> getShiftz(){
+    public List<Shift> getSelectedShiftz(){
         return shiftz;
     }
     
-    public void setShiftz(List<Shift> shiftz){
+    public void setSelectedShiftz(List<Shift> shiftz){
         this.shiftz = shiftz;
     }
     
@@ -53,13 +64,14 @@ public class DayMBean {
         DayDAO ddao = new DayDAO();
         try{
             if(d.getId() == 0){
+                d.setName("Segunda");
                 d.setShifts(shiftz);
                 ddao.create(d);
                 d = new Day();
+                shiftz = new ArrayList();
             }else{
                 ddao.update(d);
-            }
-            
+            }           
         }finally{
             ddao.close();
         }
@@ -79,5 +91,28 @@ public class DayMBean {
             ddao.close();
         }
         return null;
+    }
+    
+    public void addMF(){
+        ShiftDAO sdao = new ShiftDAO();
+        try{
+            shi = sdao.findByPK(shi.getId());            
+            shiftz.add(shi);
+            shi = new Shift();
+        }catch(Exception error){
+            System.out.println("Erro: " + error.toString());
+        }
+    }
+    
+    public void addSelectedShift(){
+        ShiftDAO sdao = new ShiftDAO();
+        try{
+            shi = sdao.selectedShift();
+            sdao.create(shi);
+            shiftz.add(shi);
+            shi = new Shift();
+        }catch(Exception error){
+            System.out.println("Erro: " + error.toString());
+        }
     }
 }

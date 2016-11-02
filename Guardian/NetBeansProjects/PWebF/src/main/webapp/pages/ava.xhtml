@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui" 
     template="/templates/template.xhtml">
     
-    <ui:define name="titulo" >Available</ui:define>
+    <ui:define name="titulo" >Disponibilidade</ui:define>
     
     <ui:define name="conteudo">
         
@@ -16,46 +16,105 @@
             <p:tab title="Cadastrar">
             
                 <h:form>
+                    <p:panel>
+                        <p:outputLabel value="Segunda-Feira" style="font-weight: bold;"/>
+                        <p:panelGrid columns="2" style="margin-bottom:10px" >                            
+                            <h:outputText value="Horarios:" />
+                            <p:selectManyButton value="#{dayMBean.selectedShifts}">
+                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                            </p:selectManyButton>
+
+                            <p:commandButton value="Submit" update="displayM" icon="ui-icon-check" />
+                            <p:spacer />
+
+                            <h:outputText value="Selected:" />
+                            <p:dataList id="displayM" value="#{dayMBean.selectedShifts}" var="font" emptyMessage="Nenhum horario selecionado">
+                                <h:outputText value="#{font}" style="font-weight: bold" />
+                            </p:dataList>
+                            <p:commandButton value="SALVAR" action="#{dayMBean.insertMonday}" icon="ui-icon-disk"/>
+                        </p:panelGrid>                        
+                    </p:panel>
                     
                     <p:panel>
-                        <p:panelGrid>
-                        <p:selectManyCheckbox value="#{availableMBean.dayz}" layout="pageDirection">
-                                <f:selectItem itemLabel="Segunda-Feira" itemValue="Segunda"></f:selectItem>    
-                                
-                                                            </p:selectManyCheckbox>    
-                            </p:panelGrid>
-                        <p:panelGrid>
+                        <p:outputLabel value="Terça-Feira" style="font-weight: bold;"/>
+                        <p:panelGrid columns="2" style="margin-bottom:10px" >                            
+                            <h:outputText value="Horarios:" />
+                            <p:selectManyButton value="#{dayMBean.selectedShifts}">
+                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                            </p:selectManyButton>
 
-                            <p:selectManyButton value="#{dayMBean.selectedShiftz}" >
+                            <p:commandButton value="Submit" update="displayTu" icon="ui-icon-check" />
+                            <p:spacer />
 
-                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.id}" />
-
-                            </p:selectManyButton> 
-                            <p:commandButton value="Adicionar dia" action="#{dayMBean.addMF}" icon="ui-icon-plus" ajax="false" />
-                            <br/>
-                            <p:commandButton value="SALVAR" action="#{dayMBean.save}" icon="ui-icon-disk" ajax="false" />
-
-                        </p:panelGrid>
-                        <p:separator/>
-                        <p:panelGrid>
-                        <p:selectManyButton value="#{dayMBean.selectedShiftz}" >
-                                <f:selectItem itemLabel="Terça-Feira" itemValue="Segunda"></f:selectItem> 
-                                </p:selectManyButton>
-                            </p:panelGrid>
-                        <p:panelGrid>
-
-                            <p:selectManyButton value="#{dayMBean.selectedShiftz}" >
-
-                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.id}" />
-
-                            </p:selectManyButton> 
-                            <p:commandButton value="Adicionar dia" action="#{dayMBean.addMF}" icon="ui-icon-plus" ajax="false" />
-                            <br/>
-                            <p:commandButton value="SALVAR" action="#{dayMBean.save}" icon="ui-icon-disk" ajax="false" />
-                            </p:panelGrid>                     
+                            <h:outputText value="Selected:" />
+                            <p:dataList id="displayTu" value="#{dayMBean.selectedShifts}" var="font" emptyMessage="Nenhum horario selecionado">
+                                <h:outputText value="#{font}" style="font-weight: bold" />
+                            </p:dataList>
+                            <p:commandButton value="SALVAR" action="#{dayMBean.insertTuesday}" icon="ui-icon-disk"/>
+                        </p:panelGrid>                     
                         
                     </p:panel>
-                                          
+
+                    <p:panel>
+                        <p:outputLabel value="Quarta-Feira" style="font-weight: bold;"/>
+                        <p:panelGrid columns="2" style="margin-bottom:10px" >                            
+                            <h:outputText value="Horarios:" />
+                            <p:selectManyButton value="#{dayMBean.selectedShifts}">
+                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                            </p:selectManyButton>
+
+                            <p:commandButton value="Submit" update="displayw" icon="ui-icon-check" />
+                            <p:spacer />
+
+                            <h:outputText value="Selected:" />
+                            <p:dataList id="displayw" value="#{dayMBean.selectedShifts}" var="font" emptyMessage="Nenhum horario selecionado">
+                                <h:outputText value="#{font}" style="font-weight: bold" />
+                            </p:dataList>
+                            <p:commandButton value="SALVAR" action="#{dayMBean.insertWednesday}" icon="ui-icon-disk"/>
+                        </p:panelGrid>                     
+                        
+                    </p:panel>
+
+                    <p:panel>
+                        <p:outputLabel value="Quinta-Feira" style="font-weight: bold;"/>
+                        <p:panelGrid columns="2" style="margin-bottom:10px" >                            
+                            <h:outputText value="Horarios:" />
+                            <p:selectManyButton value="#{dayMBean.selectedShifts}">
+                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                            </p:selectManyButton>
+
+                            <p:commandButton value="Submit" update="displayth" icon="ui-icon-check" />
+                            <p:spacer />
+
+                            <h:outputText value="Selected:" />
+                            <p:dataList id="displayth" value="#{dayMBean.selectedShifts}" var="font" emptyMessage="Nenhum horario selecionado">
+                                <h:outputText value="#{font}" style="font-weight: bold" />
+                            </p:dataList>
+                            <p:commandButton value="SALVAR" action="#{dayMBean.insertThursday}" icon="ui-icon-disk"/>
+                        </p:panelGrid>                     
+                        
+                    </p:panel>                   
+
+                    <p:panel>
+                        <p:outputLabel value="Sexta-Feira" style="font-weight: bold;"/>
+                        <p:panelGrid columns="2" style="margin-bottom:10px" >                            
+                            <h:outputText value="Horarios:" />
+                            <p:selectManyButton value="#{dayMBean.selectedShifts}">
+                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                            </p:selectManyButton>
+
+                            <p:commandButton value="Submit" update="displayf" icon="ui-icon-check" />
+                            <p:spacer />
+
+                            <h:outputText value="Selected:" />
+                            <p:dataList id="displayf" value="#{dayMBean.selectedShifts}" var="font" emptyMessage="Nenhum horario selecionado">
+                                <h:outputText value="#{font}" style="font-weight: bold" />
+                            </p:dataList>
+                            <p:commandButton value="SALVAR" action="#{dayMBean.insertThursday}" icon="ui-icon-disk"/>
+                        </p:panelGrid>                     
+                        
+                    </p:panel>
+                    
                 </h:form>
                 
             </p:tab>

@@ -25,6 +25,20 @@ public class ShiftDAO extends GenericDAO<Shift>{
         return null;
     }
     
+    public Shift searchByGroup(String group){
+        
+        try{
+            EntityManager ent = getEm();
+            Query query = ent.createQuery("SELECT s FROM tb_shifts s WHERE s.group = :gr");
+            query.setParameter("gr", group);
+            Shift shift = (Shift) query.getSingleResult();
+            return shift;
+        }catch(Exception error){
+            System.out.println("Erro: " + error);
+        }
+        return null;
+    }    
+    
     public Shift selectedShift(){
         EntityManager ema = getEm();
         TypedQuery<Shift> query = ema.createQuery("FROM tb_shifts s ORDER BY s.id DESC", Shift.class);

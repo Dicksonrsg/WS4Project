@@ -1,1 +1,1 @@
-<% response.sendRedirect("pages/login.html"); %>
+<% response.sendRedirect("pages/ava.html"); %>

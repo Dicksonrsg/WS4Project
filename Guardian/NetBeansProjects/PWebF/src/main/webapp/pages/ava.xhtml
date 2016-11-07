@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html" 
       xmlns:f="http://xmlns.jcp.org/jsf/core" 
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
-      xmlns:p="http://primefaces.org/ui" 
+      xmlns:p="http://primefaces.org/ui"
     template="/templates/template.xhtml">
     
     <ui:define name="titulo" >Disponibilidade</ui:define>
@@ -16,11 +16,23 @@
             <p:tab title="Cadastrar">
             
                 <h:form>
+                    <p:panelGrid style="margin-bottom:10px" >
+                    <p:outputLabel value="Professor matricula: "/>
+                    <br/>
+                    <p:inputNumber maxlength="4" required="true" requiredMessage="Campo Matricula é obrigatorio" value="#{avaMBean.rg}" thousandSeparator="" decimalPlaces="0" />
+                    <p:commandButton value="BUSCAR" action="#{avaMBean.findByRG}" update="teacher" />
+                    <br/>
+                    <h:outputText value="Selected:" />
+                    <p:dataList value="#{avaMBean.tea.name}" id="teacher" var="teacher" emptyMessage="Nenhum professor selecionado" >
+                        <h:outputText value="#{teacher}" style="font-weight: bold" />
+                    </p:dataList>
+                    </p:panelGrid>
+                    
                     <p:panel>
                         <p:outputLabel value="Segunda-Feira" style="font-weight: bold;"/>
                         <p:panelGrid columns="2" style="margin-bottom:10px" >                            
                             <h:outputText value="Horarios:" />
-                            <p:selectManyButton value="#{dayMBean.selectedShifts}">
+                            <p:selectManyButton value="#{avaMBean.selectedShiftsM}">
                                 <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
                             </p:selectManyButton>
 
@@ -28,18 +40,18 @@
                             <p:spacer />
 
                             <h:outputText value="Selected:" />
-                            <p:dataList id="displayM" value="#{dayMBean.selectedShifts}" var="font" emptyMessage="Nenhum horario selecionado">
+                            <p:dataList id="displayM" value="#{avaMBean.selectedShiftsM}" var="font" emptyMessage="Nenhum horario selecionado">
                                 <h:outputText value="#{font}" style="font-weight: bold" />
                             </p:dataList>
-                            <p:commandButton value="SALVAR" action="#{dayMBean.insertMonday}" icon="ui-icon-disk"/>
                         </p:panelGrid>                        
                     </p:panel>
+                    
                     
                     <p:panel>
                         <p:outputLabel value="Terça-Feira" style="font-weight: bold;"/>
                         <p:panelGrid columns="2" style="margin-bottom:10px" >                            
                             <h:outputText value="Horarios:" />
-                            <p:selectManyButton value="#{dayMBean.selectedShifts}">
+                            <p:selectManyButton value="#{avaMBean.selectedShiftsTu}">
                                 <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
                             </p:selectManyButton>
 
@@ -47,10 +59,9 @@
                             <p:spacer />
 
                             <h:outputText value="Selected:" />
-                            <p:dataList id="displayTu" value="#{dayMBean.selectedShifts}" var="font" emptyMessage="Nenhum horario selecionado">
+                            <p:dataList id="displayTu" value="#{avaMBean.selectedShiftsTu}" var="font" emptyMessage="Nenhum horario selecionado">
                                 <h:outputText value="#{font}" style="font-weight: bold" />
                             </p:dataList>
-                            <p:commandButton value="SALVAR" action="#{dayMBean.insertTuesday}" icon="ui-icon-disk"/>
                         </p:panelGrid>                     
                         
                     </p:panel>
@@ -59,7 +70,7 @@
                         <p:outputLabel value="Quarta-Feira" style="font-weight: bold;"/>
                         <p:panelGrid columns="2" style="margin-bottom:10px" >                            
                             <h:outputText value="Horarios:" />
-                            <p:selectManyButton value="#{dayMBean.selectedShifts}">
+                            <p:selectManyButton value="#{avaMBean.selectedShiftsW}">
                                 <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
                             </p:selectManyButton>
 
@@ -67,10 +78,9 @@
                             <p:spacer />
 
                             <h:outputText value="Selected:" />
-                            <p:dataList id="displayw" value="#{dayMBean.selectedShifts}" var="font" emptyMessage="Nenhum horario selecionado">
+                            <p:dataList id="displayw" value="#{avaMBean.selectedShiftsW}" var="font" emptyMessage="Nenhum horario selecionado">
                                 <h:outputText value="#{font}" style="font-weight: bold" />
                             </p:dataList>
-                            <p:commandButton value="SALVAR" action="#{dayMBean.insertWednesday}" icon="ui-icon-disk"/>
                         </p:panelGrid>                     
                         
                     </p:panel>
@@ -79,7 +89,7 @@
                         <p:outputLabel value="Quinta-Feira" style="font-weight: bold;"/>
                         <p:panelGrid columns="2" style="margin-bottom:10px" >                            
                             <h:outputText value="Horarios:" />
-                            <p:selectManyButton value="#{dayMBean.selectedShifts}">
+                            <p:selectManyButton value="#{avaMBean.selectedShiftsTh}">
                                 <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
                             </p:selectManyButton>
 
@@ -87,10 +97,9 @@
                             <p:spacer />
 
                             <h:outputText value="Selected:" />
-                            <p:dataList id="displayth" value="#{dayMBean.selectedShifts}" var="font" emptyMessage="Nenhum horario selecionado">
+                            <p:dataList id="displayth" value="#{avaMBean.selectedShiftsTh}" var="font" emptyMessage="Nenhum horario selecionado">
                                 <h:outputText value="#{font}" style="font-weight: bold" />
                             </p:dataList>
-                            <p:commandButton value="SALVAR" action="#{dayMBean.insertThursday}" icon="ui-icon-disk"/>
                         </p:panelGrid>                     
                         
                     </p:panel>                   
@@ -99,7 +108,7 @@
                         <p:outputLabel value="Sexta-Feira" style="font-weight: bold;"/>
                         <p:panelGrid columns="2" style="margin-bottom:10px" >                            
                             <h:outputText value="Horarios:" />
-                            <p:selectManyButton value="#{dayMBean.selectedShifts}">
+                            <p:selectManyButton value="#{avaMBean.selectedShiftsF}">
                                 <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
                             </p:selectManyButton>
 
@@ -107,18 +116,50 @@
                             <p:spacer />
 
                             <h:outputText value="Selected:" />
-                            <p:dataList id="displayf" value="#{dayMBean.selectedShifts}" var="font" emptyMessage="Nenhum horario selecionado">
+                            <p:dataList id="displayf" value="#{avaMBean.selectedShiftsF}" var="font" emptyMessage="Nenhum horario selecionado">
                                 <h:outputText value="#{font}" style="font-weight: bold" />
                             </p:dataList>
-                            <p:commandButton value="SALVAR" action="#{dayMBean.insertThursday}" icon="ui-icon-disk"/>
-                        </p:panelGrid>                     
+                        </p:panelGrid> 
+                        </p:panel>   
+                        <p:commandButton value="SAVE ALL" action="#{avaMBean.save}" />
                         
-                    </p:panel>
-                    
                 </h:form>
                 
             </p:tab>
+            
+            <p:tab title="Lista Disponibilidade">
                 
+                <h:form>
+                    
+                    <p:dataTable var="available" value="#{avaMBean.listFull}" scrollable="true" scrollHeight="300" style="width: 98%;" emptyMessage="Nenhuma disponibilidade cadastrada" >
+                        
+                        <p:column headerText="Id" footerText="Id" style="width: 10%;" sortBy="#{available.id}">
+                            <h:outputText value="#{available.id}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Professor" footerText="Professor" style="width: 30%;" sortBy="#{available.teacher.name}" filterBy="#{available.teacher.name}" >
+                            <h:outputText value="#{available.teacher.name}"/>
+                        </p:column> 
+                        
+                        <p:column headerText="Dia" footerText="Dia" style="width: 10%;" filterBy="">
+                             
+                            <ui:repeat value="#{available.days}" var="day" >
+                                #{day.name}                             
+                            <ui:repeat value="#{day.shifts}" var="shift">
+                                #{shift.group}
+                            </ui:repeat>
+                                <br/>
+                            </ui:repeat>                                
+                        </p:column>
+                        
+                        <p:column headerText="Ação" footerText="Ação" style="width: 10%; text-align: center;">
+                            <p:commandButton icon="ui-icon-search" ajax="false" action="#{avaMBean.selectAva(available)}"/>
+                            <p:commandButton icon="ui-icon-trash" ajax="false" action="#{avaMBean.deleteAva(available)}" onclick="return confirm('Excluir #{available.id} ?')"/>
+                        </p:column>
+                    </p:dataTable>
+                    
+                </h:form>
+            </p:tab>
         </p:tabView>
         
     </ui:define>      

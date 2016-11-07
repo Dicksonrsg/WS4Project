@@ -7,10 +7,11 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
-@ManagedBean
+@ManagedBean(name = "teacherMBean")
 public class TeacherMBean extends AbstractCtrl<Teacher> {
 	
     private Teacher tea = new Teacher();
+    private String rg = new String();   
 
     public Teacher getTea() {
         return tea;
@@ -20,6 +21,14 @@ public class TeacherMBean extends AbstractCtrl<Teacher> {
         this.tea = tea;
     }
 
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }    
+    
     public List<Teacher> getListAll(){
         TeacherDAO tdao = new TeacherDAO();
 
@@ -43,7 +52,7 @@ public class TeacherMBean extends AbstractCtrl<Teacher> {
         }finally{
             tdao.close();
         }
-        return null;
+        return "main?faces-redirect=true";
     }
 	
     public String select(Teacher tea){
@@ -61,8 +70,29 @@ public class TeacherMBean extends AbstractCtrl<Teacher> {
             return null;
     }
 
-    public Teacher findByRG(int rg){
-            TeacherDAO tdao = new TeacherDAO();
-            return tdao.findByRG(rg);
+    public Teacher findByRG(){
+        TeacherDAO tdao = new TeacherDAO();
+        try{
+            if(rg != null){
+                if(rg.length() < 4){
+                    System.out.println("Matricula precisa de 4 numeros");
+                }else{
+                    int rg2 = Integer.parseInt(rg);
+                    tea = tdao.findByRG(rg2);
+                    System.out.println("*-*" + tea.toString());
+                    return tea;
+                }
+            }else{
+                System.out.println("Matricula não pode ser vazia!");
+            }            
+        }catch(NumberFormatException error){
+            System.out.println("Erro: " + error);
+        }finally{
+            rg = new String();
+            tea = new Teacher();
+            tdao.close();
+        }    
+        return null;
     }
+
 }

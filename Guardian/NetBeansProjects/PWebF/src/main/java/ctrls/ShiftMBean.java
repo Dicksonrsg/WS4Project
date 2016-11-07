@@ -41,7 +41,7 @@ public class ShiftMBean extends AbstractCtrl<Shift>{
         }finally{
             sdao.close();
         } 
-        return null;
+        return "main?faces-redirect=true";
     }
     
     public String select(Shift shi){

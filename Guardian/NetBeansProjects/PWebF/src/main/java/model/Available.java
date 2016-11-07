@@ -1,6 +1,7 @@
 package model;
 
 import dao.PersistDB;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-@Entity(name = "tb_avalable")
-public class Available implements PersistDB{
+@Entity(name = "tb_available")
+public class Available implements PersistDB, Serializable{
     @Id
     @GeneratedValue
     @Column(name = "ava_id")

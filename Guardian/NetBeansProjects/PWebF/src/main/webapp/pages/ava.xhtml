@@ -19,7 +19,7 @@
                     <p:panelGrid style="margin-bottom:10px" >
                     <p:outputLabel value="Professor matricula: "/>
                     <br/>
-                    <p:inputNumber maxlength="4" required="true" requiredMessage="Campo Matricula é obrigatorio" value="#{avaMBean.rg}" thousandSeparator="" decimalPlaces="0" />
+                    <p:inputMask mask="9999" required="true" requiredMessage="Campo Matricula é obrigatorio" value="#{avaMBean.rg}" />
                     <p:commandButton value="BUSCAR" action="#{avaMBean.findByRG}" update="teacher" />
                     <br/>
                     <h:outputText value="Selected:" />
@@ -40,8 +40,8 @@
                             <p:spacer />
 
                             <h:outputText value="Selected:" />
-                            <p:dataList id="displayM" value="#{avaMBean.selectedShiftsM}" var="font" emptyMessage="Nenhum horario selecionado">
-                                <h:outputText value="#{font}" style="font-weight: bold" />
+                            <p:dataList id="displayM" value="#{avaMBean.selectedShiftsM}" var="M" emptyMessage="Nenhum horario selecionado">
+                                <h:outputText value="#{M}" style="font-weight: bold" />
                             </p:dataList>
                         </p:panelGrid>                        
                     </p:panel>
@@ -59,8 +59,8 @@
                             <p:spacer />
 
                             <h:outputText value="Selected:" />
-                            <p:dataList id="displayTu" value="#{avaMBean.selectedShiftsTu}" var="font" emptyMessage="Nenhum horario selecionado">
-                                <h:outputText value="#{font}" style="font-weight: bold" />
+                            <p:dataList id="displayTu" value="#{avaMBean.selectedShiftsTu}" var="Tu" emptyMessage="Nenhum horario selecionado">
+                                <h:outputText value="#{Tu}" style="font-weight: bold" />
                             </p:dataList>
                         </p:panelGrid>                     
                         
@@ -78,8 +78,8 @@
                             <p:spacer />
 
                             <h:outputText value="Selected:" />
-                            <p:dataList id="displayw" value="#{avaMBean.selectedShiftsW}" var="font" emptyMessage="Nenhum horario selecionado">
-                                <h:outputText value="#{font}" style="font-weight: bold" />
+                            <p:dataList id="displayw" value="#{avaMBean.selectedShiftsW}" var="W" emptyMessage="Nenhum horario selecionado">
+                                <h:outputText value="#{W}" style="font-weight: bold" />
                             </p:dataList>
                         </p:panelGrid>                     
                         
@@ -97,8 +97,8 @@
                             <p:spacer />
 
                             <h:outputText value="Selected:" />
-                            <p:dataList id="displayth" value="#{avaMBean.selectedShiftsTh}" var="font" emptyMessage="Nenhum horario selecionado">
-                                <h:outputText value="#{font}" style="font-weight: bold" />
+                            <p:dataList id="displayth" value="#{avaMBean.selectedShiftsTh}" var="Th" emptyMessage="Nenhum horario selecionado">
+                                <h:outputText value="#{Th}" style="font-weight: bold" />
                             </p:dataList>
                         </p:panelGrid>                     
                         
@@ -116,8 +116,8 @@
                             <p:spacer />
 
                             <h:outputText value="Selected:" />
-                            <p:dataList id="displayf" value="#{avaMBean.selectedShiftsF}" var="font" emptyMessage="Nenhum horario selecionado">
-                                <h:outputText value="#{font}" style="font-weight: bold" />
+                            <p:dataList id="displayf" value="#{avaMBean.selectedShiftsF}" var="F" emptyMessage="Nenhum horario selecionado">
+                                <h:outputText value="#{F}" style="font-weight: bold" />
                             </p:dataList>
                         </p:panelGrid> 
                         </p:panel>   
@@ -141,13 +141,13 @@
                             <h:outputText value="#{available.teacher.name}"/>
                         </p:column> 
                         
-                        <p:column headerText="Dia" footerText="Dia" style="width: 10%;" filterBy="">
+                        <p:column headerText="Dia" footerText="Dia" style="width: 10%;" filterBy="#{availale.days}">
                              
                             <ui:repeat value="#{available.days}" var="day" >
-                                #{day.name}                             
-                            <ui:repeat value="#{day.shifts}" var="shift">
-                                #{shift.group}
-                            </ui:repeat>
+                                #{day.name}                              
+                                <ui:repeat value="#{day.shifts}" var="shift">
+                                    #{shift.group}
+                                </ui:repeat>
                                 <br/>
                             </ui:repeat>                                
                         </p:column>

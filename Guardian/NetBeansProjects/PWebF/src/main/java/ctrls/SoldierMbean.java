@@ -28,7 +28,7 @@ public class SoldierMbean extends AbstractCtrl<Soldier> {
         String pw = getSol().getPassword();
         try{
             if(sodao.login(user, pw) != null){
-                return "main?faces-redirect=true";
+                return "f1w?faces-redirect=true";
             }else{
                 return "login?faces-redirect=true";
             }           

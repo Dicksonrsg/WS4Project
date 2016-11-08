@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity(name = "tb_days")
 public class Day implements PersistDB, Serializable{
@@ -19,7 +19,7 @@ public class Day implements PersistDB, Serializable{
     private int id;
     @Column(name = "day_name")
     private String name;
-    @OneToMany
+    @ManyToMany
     @JoinColumn(name = "day_shi_id")
     private List<Shift> shifts;
 

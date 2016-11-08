@@ -2,12 +2,12 @@ package ctrls;
 
 import model.Teacher;
 import dao.TeacherDAO;
-
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean(name = "teacherMBean")
+@ViewScoped
 public class TeacherMBean extends AbstractCtrl<Teacher> {
 	
     private Teacher tea = new Teacher();
@@ -48,11 +48,12 @@ public class TeacherMBean extends AbstractCtrl<Teacher> {
                 tea = new Teacher();
             } else{
                 tdao.update(tea);
-            }			
+            }
+            addInfo("Professor salvo com Sucesso");
         }finally{
             tdao.close();
         }
-        return "main?faces-redirect=true";
+        return null;
     }
 	
     public String select(Teacher tea){
@@ -64,6 +65,7 @@ public class TeacherMBean extends AbstractCtrl<Teacher> {
             TeacherDAO tdao = new TeacherDAO();
             try{
                     tdao.delete(tea);
+                    addInfo("Professor deletado com sucesso!");
             }finally{
                     tdao.close();
             }
@@ -75,15 +77,14 @@ public class TeacherMBean extends AbstractCtrl<Teacher> {
         try{
             if(rg != null){
                 if(rg.length() < 4){
-                    System.out.println("Matricula precisa de 4 numeros");
+                    addInfo("O campo matricula precisa de 4 digitos.");
                 }else{
                     int rg2 = Integer.parseInt(rg);
                     tea = tdao.findByRG(rg2);
-                    System.out.println("*-*" + tea.toString());
                     return tea;
                 }
             }else{
-                System.out.println("Matricula não pode ser vazia!");
+                addInfo("Matricula não pode ser vazia!");
             }            
         }catch(NumberFormatException error){
             System.out.println("Erro: " + error);

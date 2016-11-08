@@ -13,7 +13,7 @@ import model.Shift;
 import model.Teacher;
 
 @ManagedBean(name = "avaMBean")
-public class AvailableMBean {
+public class AvailableMBean extends AbstractCtrl<Available>{
 
     private Available ava = new Available();
     private Teacher tea = new Teacher();
@@ -154,15 +154,15 @@ public class AvailableMBean {
             if(ava.getId() == 0){
                 tea = findByRG();
                 ava.setTeacher(tea);
-                if (selectedShiftsM != null){
-                    
+                if (selectedShiftsM.isEmpty() == false){                   
                     try{
-                        for(String group : selectedShiftsM){
+                        List<Shift> shiftM = new ArrayList<>();
+                        for(String group : selectedShiftsM){                           
                             shi = sdao.searchByGroup(group);
-                            shiftz.add(shi);
+                            shiftM.add(shi);
                         }
                         da.setName("Segunda");
-                        da.setShifts(shiftz);
+                        da.setShifts(shiftM);
                         ddao.create(da);
                         dayz.add(da);
                     }catch(Exception error){
@@ -173,15 +173,15 @@ public class AvailableMBean {
                         da = new Day();
                     }  
                 }
-                if (selectedShiftsTu != null){
-                    
+                if (selectedShiftsTu.isEmpty() == false){                   
                     try{
+                        List<Shift> shiftTu = new ArrayList<>();
                         for(String group : selectedShiftsTu){
                             shi = sdao.searchByGroup(group);
-                            shiftz.add(shi);
+                            shiftTu.add(shi);
                         }
                         da.setName("Terca");
-                        da.setShifts(shiftz);
+                        da.setShifts(shiftTu);
                         ddao.create(da);
                         dayz.add(da);
                     }catch(Exception error){
@@ -192,15 +192,15 @@ public class AvailableMBean {
                         da = new Day();
                     }  
                 }
-                if (selectedShiftsW != null){
-                   
+                if (selectedShiftsW.isEmpty() == false){                   
                     try{
+                        List<Shift> shiftW = new ArrayList<>();
                         for(String group : selectedShiftsW){
                             shi = sdao.searchByGroup(group);
-                            shiftz.add(shi);
+                            shiftW.add(shi);
                         }
                         da.setName("Quarta");
-                        da.setShifts(shiftz);
+                        da.setShifts(shiftW);
                         ddao.create(da);
                         dayz.add(da);
                     }catch(Exception error){
@@ -211,15 +211,15 @@ public class AvailableMBean {
                         da = new Day();
                     }  
                 }
-                if (selectedShiftsTh != null){
-                    
+                if (selectedShiftsTh.isEmpty() == false){                    
                     try{
+                        List<Shift> shiftTh = new ArrayList<>();
                         for(String group : selectedShiftsTh){
                             shi = sdao.searchByGroup(group);
-                            shiftz.add(shi);
+                            shiftTh.add(shi);
                         }
                         da.setName("Quinta");
-                        da.setShifts(shiftz);
+                        da.setShifts(shiftTh);
                         ddao.create(da);
                         dayz.add(da);
                     }catch(Exception error){
@@ -230,15 +230,15 @@ public class AvailableMBean {
                         da = new Day();
                     }  
                 }  
-                if (selectedShiftsF != null){
-                    
+                if (selectedShiftsF.isEmpty() == false){                   
                     try{
+                        List<Shift> shiftF = new ArrayList<>();
                         for(String group : selectedShiftsF){
                             shi = sdao.searchByGroup(group);
-                            shiftz.add(shi);
+                            shiftF.add(shi);
                         }
                         da.setName("Sexta");
-                        da.setShifts(shiftz);
+                        da.setShifts(shiftF);
                         ddao.create(da);
                         dayz.add(da);
                     }catch(Exception error){
@@ -254,6 +254,7 @@ public class AvailableMBean {
             }else{
                 adao.update(ava);
             }
+            addInfo("Salvo com Sucesso");
         }finally{
             adao.close();
             tea = new Teacher();

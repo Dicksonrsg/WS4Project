@@ -18,22 +18,17 @@ public class Soldier implements PersistDB, Serializable {
     private String user;
     @Column(name = "sol_password")
     private String password;
+    @Column(name = "sol_name")
+    private String name;
 
     public Soldier() {
     }
 
-    public Soldier(int id, String user, String password) {
+    public Soldier(int id, String user, String password, String name) {
         this.id = id;
         this.user = user;
         this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+        this.name = name;
     }
 
     public int getId() {
@@ -52,9 +47,25 @@ public class Soldier implements PersistDB, Serializable {
         this.user = user;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return "soldier{" + "id=" + id + ", user=" + user + ", password=" + password + '}';
+        return "Soldier{" + "id=" + id + ", user=" + user + ", password=" + password + ", name=" + name + '}';
     }
     
 }

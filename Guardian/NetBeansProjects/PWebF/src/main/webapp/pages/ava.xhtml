@@ -11,7 +11,7 @@
     
     <ui:define name="conteudo">
         
-        <p:tabView>
+        <p:tabView id="tva">
             
             <p:tab title="Cadastrar">
             
@@ -120,8 +120,8 @@
                                 <h:outputText value="#{F}" style="font-weight: bold" />
                             </p:dataList>
                         </p:panelGrid> 
-                        </p:panel>   
-                        <p:commandButton value="SAVE ALL" action="#{avaMBean.save}" />
+                    </p:panel>   
+                        <p:commandButton value="SALVAR" update="tva" action="#{avaMBean.save}" ajax="false"/>
                         
                 </h:form>
                 
@@ -129,7 +129,7 @@
             
             <p:tab title="Lista Disponibilidade">
                 
-                <h:form>
+                <h:form id="fa2">
                     
                     <p:dataTable var="available" value="#{avaMBean.listFull}" scrollable="true" scrollHeight="300" style="width: 98%;" emptyMessage="Nenhuma disponibilidade cadastrada" >
                         
@@ -153,8 +153,8 @@
                         </p:column>
                         
                         <p:column headerText="Ação" footerText="Ação" style="width: 10%; text-align: center;">
-                            <p:commandButton icon="ui-icon-search" ajax="false" action="#{avaMBean.selectAva(available)}"/>
-                            <p:commandButton icon="ui-icon-trash" ajax="false" action="#{avaMBean.deleteAva(available)}" onclick="return confirm('Excluir #{available.id} ?')"/>
+                            <p:commandButton icon="ui-icon-search" ajax="true" action="#{avaMBean.selectAva(available)}"/>
+                            <p:commandButton icon="ui-icon-trash" ajax="false" update="tva:fa2" action="#{avaMBean.deleteAva(available)}" onclick="return confirm('Excluir a disponibilidade de #{available.teacher.name} ?')"/>
                         </p:column>
                     </p:dataTable>
                     

@@ -2,13 +2,14 @@ package ctrls;
 
 import model.Teacher;
 import dao.TeacherDAO;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "teacherMBean")
-@ViewScoped
-public class TeacherMBean extends AbstractCtrl<Teacher> {
+@SessionScoped
+public class TeacherMBean extends AbstractCtrl<Teacher> implements Serializable{
 	
     private Teacher tea = new Teacher();
     private String rg = new String();   
@@ -31,13 +32,11 @@ public class TeacherMBean extends AbstractCtrl<Teacher> {
     
     public List<Teacher> getListAll(){
         TeacherDAO tdao = new TeacherDAO();
-
         try{
-                return tdao.findAll();
+           return tdao.findAll();
         }finally{
                 tdao.close();
         }
-
     }
 	
     public String save(){
@@ -45,31 +44,32 @@ public class TeacherMBean extends AbstractCtrl<Teacher> {
         try{
             if(tea.getId() == 0){
                 tdao.create(tea);
-                tea = new Teacher();
+                tea = new Teacher();                
+                addInfo("Professsor cadastrado!");               
             } else{
                 tdao.update(tea);
+                addInfo("Cadastrado atualizado!");
             }
-            addInfo("Professor salvo com Sucesso");
         }finally{
             tdao.close();
         }
-        return null;
+        return "main";
     }
 	
     public String select(Teacher tea){
-            this.tea = tea;
-            return null;
+        this.tea = tea;
+        return null;
     }
 
     public String delete(Teacher tea){
-            TeacherDAO tdao = new TeacherDAO();
-            try{
-                    tdao.delete(tea);
-                    addInfo("Professor deletado com sucesso!");
-            }finally{
-                    tdao.close();
-            }
-            return null;
+        TeacherDAO tdao = new TeacherDAO();
+        try{
+            tdao.delete(tea);
+            addInfo("Deletado com sucesso!");
+        }finally{
+                tdao.close();
+        }
+        return "main";
     }
 
     public Teacher findByRG(){
@@ -77,14 +77,14 @@ public class TeacherMBean extends AbstractCtrl<Teacher> {
         try{
             if(rg != null){
                 if(rg.length() < 4){
-                    addInfo("O campo matricula precisa de 4 digitos.");
+                    addWarn("O campo matricula precisa de 4 digitos.");
                 }else{
                     int rg2 = Integer.parseInt(rg);
                     tea = tdao.findByRG(rg2);
                     return tea;
                 }
             }else{
-                addInfo("Matricula não pode ser vazia!");
+                addWarn("Matricula não pode ser vazia!");
             }            
         }catch(NumberFormatException error){
             System.out.println("Erro: " + error);

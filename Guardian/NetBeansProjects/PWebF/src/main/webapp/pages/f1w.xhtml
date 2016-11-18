@@ -17,16 +17,20 @@
         </p>
         
         <h:form>
+            <p>Seja bem vindo <h:outputText value="#{soldierMB.sol.name}" style="font-weight: bold"/> </p>
             <ul>
                 <li>
                     <h:commandLink action="main?faces-redirect=true" value="Cadastrar Professor"/>
-                    <p>Cadastre um Professor e visualize a lista de cadastrados</p>
+                    <p>Cadastre um Professor e visualize a lista de cadastrados.</p>
                 </li>
                 
                 <li>
                     <h:commandLink action="ava?faces-redirect=true" value="Cadastrar Disponibilidade"/>
-                    <p>Cadastre uma disponibilidade e viasualize a lista cadastrada</p>
+                    <p>Cadastre uma disponibilidade e viasualize a lista cadastrada.</p>
                 </li>
+                <li>
+                    <h:commandLink action="#{soldierMB.logout}" value="Logout"/>
+                </li>                
             </ul>
         </h:form>
         

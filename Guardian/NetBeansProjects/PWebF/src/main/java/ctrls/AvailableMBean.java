@@ -4,16 +4,19 @@ import dao.AvailableDAO;
 import dao.DayDAO;
 import dao.ShiftDAO;
 import dao.TeacherDAO;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import model.Available;
 import model.Day;
 import model.Shift;
 import model.Teacher;
 
 @ManagedBean(name = "avaMBean")
-public class AvailableMBean extends AbstractCtrl<Available>{
+@SessionScoped
+public class AvailableMBean extends AbstractCtrl<Available> implements Serializable{
 
     private Available ava = new Available();
     private Teacher tea = new Teacher();
@@ -248,20 +251,21 @@ public class AvailableMBean extends AbstractCtrl<Available>{
                         sdao.close();
                         da = new Day();
                     }  
-                }                
+                }
+                addInfo("Salvo com Sucesso");
                 ava.setDays(dayz);
                 adao.create(ava);
             }else{
+                addInfo("Cadastrado atualizado!");
                 adao.update(ava);
             }
-            addInfo("Salvo com Sucesso");
         }finally{
             adao.close();
             tea = new Teacher();
             ava = new Available();
             da = new Day();
         }
-        return null;
+        return "ava";
     }
     
     public String selectAva(Available ava){
@@ -276,10 +280,11 @@ public class AvailableMBean extends AbstractCtrl<Available>{
                 deleteDay(day);
             }
             adao.delete(ava);
+            addInfo("Deletado com sucesso!");
         }finally{
             adao.close();
         }
-        return null;
+        return "ava";
     }
     
     public String deleteDay(Day d){

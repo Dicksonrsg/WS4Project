@@ -11,12 +11,11 @@
     <ui:define name="titulo" >Professor</ui:define>
     
     <ui:define name="conteudo">
-        
-        <p:tabView>
-            
-            <p:tab title="Cadastrar">
-                
-                <h:form>
+        <p:tabView id="tv">
+               
+            <p:tab title="Cadastrar" >
+               
+                <h:form id="f1">
                     
                     <p:panelGrid>
                         
@@ -45,13 +44,13 @@
                         <br/>
 				        <p:outputLabel for="idioma" value="Idioma:" />
 				        <p:selectOneMenu id="idioma" value="#{teacherMBean.tea.langauge}" style="width:125px">
-				            <f:selectItem itemLabel="Select One" itemValue="" />
-				            <f:selectItem itemLabel="Inglês" itemValue="english" />
-				            <f:selectItem itemLabel="Espanhol" itemValue="spanish" />
-				            <f:selectItem itemLabel="Italiano" itemValue="italian" />
-				            <f:selectItem itemLabel="Alemão" itemValue="german" />
+                                            <f:selectItem itemLabel="Select One" itemValue="" />
+				            <f:selectItem itemLabel="Inglês" itemValue="Ingles" />
+				            <f:selectItem itemLabel="Espanhol" itemValue="Espanhol" />
+				            <f:selectItem itemLabel="Italiano" itemValue="Italiano" />
+				            <f:selectItem itemLabel="Alemão" itemValue="Alemao" />
 				        </p:selectOneMenu>
-                        <br/>
+                        <br/><br/>
                        <p:outputLabel value="Telefone:" />
                         <br/>                       
                         <p:inputMask 
@@ -62,7 +61,7 @@
                         <br/>
                         <h:outputText id="display" />
                         <br/>
-                        <p:commandButton value="SALVAR" icon="ui-icon-mail-closed" ajax="false" action="#{teacherMBean.save()}" />
+                        <p:commandButton value="SALVAR" icon="ui-icon-mail-closed" ajax="false" update="tv" action="#{teacherMBean.save()}" />
                         
                     </p:panelGrid>
                     
@@ -70,32 +69,32 @@
                 
             </p:tab>
             
-            <p:tab title="Lista de Professores">
+            <p:tab title="Lista de Professores" id="t2" >
                 
-                <h:form>
+                <h:form id="f2">
                     
                     <p:dataTable var="teacher" value="#{teacherMBean.listAll}" scrollable="true" scrollHeight="300" style="width: 99%;">
                     
-                        <p:column headerText="Id" footerText="Id" style="width: 10%;">
+                        <p:column headerText="Id" footerText="Id" style="width: 10%;" >
                             <h:outputText value="#{teacher.id}" />
                         </p:column>
 
-                        <p:column headerText="Nome" footerText="Nome" sortBy=""  style="width: 40%;">
+                        <p:column headerText="Nome" footerText="Nome" filterBy="#{teacher.name}" style="width: 40%;"> 
                             <h:outputText value="#{teacher.name}" />
                         </p:column>
 
-                        <p:column headerText="Matricula" footerText="Matricula"  style="width: 20%;">
+                        <p:column headerText="Matricula" footerText="Matricula" filterBy="#{teacher.rg}" style="width: 20%;">
                             <h:outputText value="#{teacher.rg}" />
                         </p:column>
-                        <p:column headerText="Idioma" footerText="Telefone"  style="width: 20%;">
+                        <p:column headerText="Idioma" footerText="Idioma"  filterBy="#{teacher.langauge}" style="width: 20%;">
                             <h:outputText  value="#{teacher.langauge}" />
                         </p:column>
-                        <p:column headerText="Idioma" footerText="Telefone"  style="width: 20%;">
+                        <p:column headerText="Telefone" footerText="Telefone"  style="width: 20%;">
                             <h:outputText  value="#{teacher.phone}" />
                         </p:column>                        
                         <p:column headerText="Ação" footerText="Ação" style="width: 10%; text-align: center;">
                             <p:commandButton icon="ui-icon-search" ajax="false" action="#{teacherMBean.select(teacher)}" />
-                            <p:commandButton icon="ui-icon-trash" ajax="false" action="#{teacherMBean.delete(teacher)}" onclick="return confirm('Excluir #{teacher.name} ?')"/>   
+                            <p:commandButton icon="ui-icon-trash" ajax="false" update="tv:f2" action="#{teacherMBean.delete(teacher)}" onclick="return confirm('Excluir #{teacher.name} ?')" />   
                         </p:column>
                     
                     </p:dataTable>
@@ -113,13 +112,12 @@
                         <br/>
                         <h:outputText id="display" />
                         <br/>
-                        <p:commandButton value="SALVAR" icon="ui-icon-disk" ajax="false" action="#{shiftMBean.save()}"/>
+                        <p:commandButton value="SALVAR" icon="ui-icon-disk" ajax="true" action="#{shiftMBean.save()}"/>
                     </p:panelGrid>
                 </h:form>
             </p:tab>
-            
+                
         </p:tabView>
-        
     </ui:define>
 
 </ui:composition>

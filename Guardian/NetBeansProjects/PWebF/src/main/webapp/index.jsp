@@ -1,1 +1,1 @@
-<% response.sendRedirect("pages/login.html"); %>
+<% response.sendRedirect("guard/login.html"); %>

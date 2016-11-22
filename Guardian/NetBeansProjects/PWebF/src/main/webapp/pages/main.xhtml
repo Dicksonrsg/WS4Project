@@ -8,15 +8,16 @@
       xmlns:p="http://primefaces.org/ui" 
       template="/templates/template.xhtml">
     
-    <ui:define name="titulo" >Professor</ui:define>
-    
+    <ui:define name="titulo" >Professor - </ui:define>
+    <ui:define name="link"> <p:commandLink value="Inicio" action="f1w"/> </ui:define>
+    <ui:define name="loggedUser" > Usuario: <h:outputText value="#{soldierMB.sol.name}" style="font-weight: bold"/> </ui:define>
     <ui:define name="conteudo">
         <p:tabView id="tv">
                
             <p:tab title="Cadastrar" >
                
                 <h:form id="f1">
-                    
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                     <p:panelGrid>
                         
                         <h:inputHidden value="#{teacherMBean.tea.id}" />
@@ -24,8 +25,9 @@
                         <p:outputLabel value="Nome:" />
                         <br/>
                         <p:inputText value="#{teacherMBean.tea.name}" 
-                            requiredMessage="Campo nome obrigatório" 
-                            validatorMessage="Campo nome não pode passar de 70 caracteres"
+                            required="true"         
+                            requiredMessage="Campo nome obrigatório." 
+                            validatorMessage="Campo nome não pode passar de 70 caracteres."
                             size="50"
                         >
                             <f:validateLength maximum="70" />
@@ -35,8 +37,9 @@
                         <br/>
                         <p:inputMask 
                             value="#{teacherMBean.tea.rg}" 
-                            requiredMessage="Campo Matricula obrigatório"
-                            validatorMessage="Campo matricula não pode ser vazio"
+                            required="true"
+                            requiredMessage="Campo Matricula obrigatório."
+                            validatorMessage="Campo matricula não pode ser vazio."
                             mask="9999"
                         >
                         </p:inputMask>
@@ -56,12 +59,14 @@
                         <p:inputMask 
                             value="#{teacherMBean.tea.phone}" 
                             mask="(99)9999-9999"
+                            required="true"
+                            requiredMessage="CAmpo telefone obrigatorio."
                         >
                         </p:inputMask>
                         <br/>
                         <h:outputText id="display" />
                         <br/>
-                        <p:commandButton value="SALVAR" icon="ui-icon-mail-closed" ajax="false" update="tv" action="#{teacherMBean.save()}" />
+                        <p:commandButton value="SALVAR" icon="ui-icon-disk" ajax="false" update="tv" action="#{teacherMBean.save()}" />
                         
                     </p:panelGrid>
                     

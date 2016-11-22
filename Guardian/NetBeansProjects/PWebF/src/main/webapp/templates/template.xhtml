@@ -10,13 +10,11 @@
     <h:head>
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Master Replacements - <ui:insert name="titulo">Substitua o título aqui</ui:insert></title>
+        <title>Master Replacements - <ui:insert name="titulo">Titulo a ser definido</ui:insert></title>
         
     </h:head>
     
     <h:body>
-        
-        <p:growl life="3000" />
         
         <p:layout fullPage="true">
             
@@ -25,15 +23,15 @@
                 <h:form>
                     
                     Módulo Administrativo - 
-                    <h:commandLink value="Início" action="f1w" /> - 
                     <ui:insert name="titulo">Seu título Aqui...</ui:insert>
+                    <ui:insert name="link" ></ui:insert>
                     
                 </h:form>
                 
             </p:layoutUnit>
             
             <p:layoutUnit position="center" footer="Ryuu.inc/RN - Todos os direitos reservados">
-                
+                <ui:insert name="loggedUser" ></ui:insert>
                 <ui:insert name="conteudo">
                     
                     Seu Conteúdo aqui...

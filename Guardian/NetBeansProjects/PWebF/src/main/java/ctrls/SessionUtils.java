@@ -1,31 +1,52 @@
 
 package ctrls;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import model.Soldier;
 
 public class SessionUtils {
     
-    public static HttpSession getSession(){
-        return (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-    }
-    
-    public static HttpServletRequest getRequest(){
-        return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-    }
-    
-    public static String getUserName(){
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        return session.getAttribute("soldier.user").toString();
-    }
-    
-    public static String getUserId(){
-        HttpSession session = getSession();
-        if(session != null){
-            return (String) session.getAttribute("soldier.id");
-        }else{
-            return null;
-        }
-    }
+      private static SessionUtils instance;
+      
+      public static SessionUtils getInstance(){
+           if (instance == null){
+               instance = new SessionUtils();
+           }
+           
+           return instance;
+      }
+      
+      private SessionUtils(){
+           
+      }
+      
+      private ExternalContext currentExternalContext(){
+           if (FacesContext.getCurrentInstance() == null){
+               throw new RuntimeException("O FacesContext não pode ser chamado fora de uma requisição HTTP");
+           }else{
+               return FacesContext.getCurrentInstance().getExternalContext();
+           }
+      }
+      
+      public Soldier getUsuarioLogado(){
+           return (Soldier) getAttribute("usuarioLogado");
+      }
+      
+      public void setUsuarioLogado(Soldier soldier){
+           setAttribute("usuarioLogado", soldier);
+      }
+      
+      public void encerrarSessao(){   
+           currentExternalContext().invalidateSession();
+      }
+      
+      public Object getAttribute(String nome){
+           return currentExternalContext().getSessionMap().get(nome);
+      }
+      
+      public void setAttribute(String nome, Object valor){
+           currentExternalContext().getSessionMap().put(nome, valor);
+      }    
+
 }

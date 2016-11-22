@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import org.apache.commons.lang3.text.WordUtils;
 
 @Entity(name = "tb_soldiers")
 public class Soldier implements PersistDB, Serializable {
@@ -60,6 +61,7 @@ public class Soldier implements PersistDB, Serializable {
     }
 
     public void setName(String name) {
+        WordUtils.capitalize(name);
         this.name = name;
     }
 

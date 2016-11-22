@@ -7,19 +7,21 @@
       xmlns:p="http://primefaces.org/ui"
     template="/templates/template.xhtml">
     
-    <ui:define name="titulo" >Disponibilidade</ui:define>
-    
+    <ui:define name="titulo" >Disponibilidade - </ui:define>
+    <ui:define name="link"> <p:commandLink value="Inicio" action="f1w"/> </ui:define>
     <ui:define name="conteudo">
+    <ui:define name="loggedUser" > Usuario: <h:outputText value="#{soldierMB.sol.name}" style="font-weight: bold"/> </ui:define>
         
         <p:tabView id="tva">
             
             <p:tab title="Cadastrar">
             
                 <h:form>
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                     <p:panelGrid style="margin-bottom:10px" >
                     <p:outputLabel value="Professor matricula: "/>
                     <br/>
-                    <p:inputMask mask="9999" required="true" requiredMessage="Campo Matricula é obrigatorio" value="#{avaMBean.rg}" />
+                    <p:inputMask mask="9999" required="true" requiredMessage="Campo Matricula é obrigatorio" value="#{avaMBean.rg}"/>
                     <p:commandButton value="BUSCAR" action="#{avaMBean.findByRG}" update="teacher" />
                     <br/>
                     <h:outputText value="Selected:" />
@@ -121,7 +123,7 @@
                             </p:dataList>
                         </p:panelGrid> 
                     </p:panel>   
-                        <p:commandButton value="SALVAR" update="tva" action="#{avaMBean.save}" ajax="false"/>
+                        <p:commandButton value="SALVAR" update="tva" icon="ui-icon-disk" action="#{avaMBean.save}" ajax="false"/>
                         
                 </h:form>
                 

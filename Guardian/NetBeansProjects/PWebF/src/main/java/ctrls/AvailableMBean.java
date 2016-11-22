@@ -8,14 +8,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import model.Available;
 import model.Day;
 import model.Shift;
 import model.Teacher;
 
 @ManagedBean(name = "avaMBean")
-@SessionScoped
 public class AvailableMBean extends AbstractCtrl<Available> implements Serializable{
 
     private Available ava = new Available();

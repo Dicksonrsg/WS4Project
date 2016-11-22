@@ -13,4 +13,15 @@ public class AbstractCtrl<T extends PersistDB> {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN , warning, "ok"));
     }
     
+    public String nameUpper(String nu){
+        StringBuffer sb = new StringBuffer();
+        String[] swhat = nu.split(" ");
+        for(String name : swhat){
+            char[] stringArray = name.trim().toCharArray();
+            stringArray[0] = Character.toUpperCase(stringArray[0]);
+            name = new String(stringArray);
+            sb.append(name).append(" ");
+        }
+        return sb.toString();
+    } 
 }

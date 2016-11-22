@@ -5,10 +5,8 @@ import dao.TeacherDAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "teacherMBean")
-@SessionScoped
 public class TeacherMBean extends AbstractCtrl<Teacher> implements Serializable{
 	
     private Teacher tea = new Teacher();
@@ -43,6 +41,8 @@ public class TeacherMBean extends AbstractCtrl<Teacher> implements Serializable{
         TeacherDAO tdao = new TeacherDAO();	
         try{
             if(tea.getId() == 0){
+                String cn = nameUpper(tea.getName());
+                tea.setName(cn);
                 tdao.create(tea);
                 tea = new Teacher();                
                 addInfo("Professsor cadastrado!");               

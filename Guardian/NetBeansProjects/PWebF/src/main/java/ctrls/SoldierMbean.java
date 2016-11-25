@@ -14,22 +14,11 @@ public class SoldierMbean extends AbstractCtrl<Soldier> implements Serializable{
     
     private static final long serialVersionUID = 1L;
     
-    private String msg;
+    private String msg, user, pass, king;
     
-    private Soldier sol = new Soldier();
-
-    public Soldier getSol() {
-        return sol;
-    }
-
-    public void setSol(Soldier sol) {
-        this.sol = sol;
-    }
-    
-    public String select(Soldier sold){
-        this.sol = sold;
-        return null;
-    }
+    public Soldier getSoldier(){
+        return (Soldier) SessionUtils.getInstance().getUsuarioLogado();
+    }    
     
     public String getMsg() {
         return msg;
@@ -38,34 +27,60 @@ public class SoldierMbean extends AbstractCtrl<Soldier> implements Serializable{
     public void setMsg(String msg) {
         this.msg = msg;
     }
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public String getKing() {
+        return king;
+    }
+
+    public void setKing(String king) {
+        this.king = king;
+    }
     
-    public String validateSoldier(){
+    public String doLogin(){
         SoldierDAO sodao = new SoldierDAO();
-        String user = getSol().getUser();
-        String pw = getSol().getPassword();
-        if(user.equals("admin") && pw.equals("admin")){
-            sol.setUser(user);
-            sol.setPassword(pw);
-            sol.setName("Master Administrator");
-            SessionUtils.getInstance().setAttribute("usuarioLogado", sol);
+        if(user.equals("adm") && pass.equals("adm")){
+            Soldier soldier = new Soldier();
+            soldier.setUser(user);
+            soldier.setPassword(pass);
+            soldier.setName("Master Administrator");
+            king = soldier.getName();
+            SessionUtils.getInstance().setAttribute("usuarioLogado", soldier);
             System.out.println("EUREKA");
-            return "f1w?faces-redirect=true";
+            return "/pages/f1w.xhtml?faces-redirect=true";
             
-        }else if(sodao.login(user, pw) != null){
-            sol = sodao.login(user, pw);
+        }else if(sodao.login(user, pass) != null){
+            Soldier sol = sodao.login(user, pass);
+            king = sol.getName();
             System.out.println("USER: " + sol.toString());
             SessionUtils.getInstance().setAttribute("usuarioLogado", sol);
             System.out.println("EUREKA");
-            return "f1w?faces-redirect=true";
+            return "/pages/f1w?faces-redirect=true";
         }else{
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username and Passowrd", "-"));
-            return "login";
+            FacesContext.getCurrentInstance().validationFailed();
+            return "";
         }        
     }
 
-    public String logout() {
+    public String doLogout() {
         SessionUtils.getInstance().encerrarSessao();
         addInfo("Logout realizado com sucesso!");
-        return "login";
-    }    
+        return "/guard/login.xhtml?faces-redirect=true";
+    }  
+    
 }

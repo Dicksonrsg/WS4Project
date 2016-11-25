@@ -26,23 +26,22 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,FilterChain chain) throws IOException, ServletException {
        Soldier soldier = null;
        HttpSession sess = ((HttpServletRequest) request).getSession(false);
-        System.out.println("executor motherfucker");
+       System.out.println("executor motherfucker");
        if(sess != null){
             soldier = (Soldier) sess.getAttribute("usuarioLogado");
-            System.out.println(".-." + soldier.toString());
        }      
 
         if(soldier == null){
             System.out.println("WHAT THE FUCK");
             String contextPath = ((HttpServletRequest) request).getContextPath();
-            ((HttpServletResponse) response).sendRedirect(contextPath + "/guard/login.xhtml");
+            ((HttpServletResponse) response).sendRedirect(contextPath + "/guard/login.html");
         }else{
               chain.doFilter(request, response);
              }
     }    
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig arg0) throws ServletException {
     }
 
     @Override

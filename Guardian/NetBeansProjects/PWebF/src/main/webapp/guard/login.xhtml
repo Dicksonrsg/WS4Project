@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/style.css"/>
     <ui:define name="conteudo">
         
-        <h:form >
+        <h:form id="formLogin">
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:panel style=" height:120px;width:450px; position: relative;">  
             
@@ -21,12 +21,12 @@
                         
                     <p:outputLabel value="Usuario:" />
                         <br/>
-                        <p:inputText value="#{soldierMB.sol.user}" size="50">  </p:inputText> 
+                        <p:inputText value="#{soldierMB.user}" size="50">  </p:inputText> 
                         <br/>
                         <p:outputLabel value="Senha:" />
-                        <p:password value="#{soldierMB.sol.password}" size="50" >  </p:password>
+                        <p:password value="#{soldierMB.pass}" size="50" >  </p:password>
                         <br/>
-                        <p:commandButton value="Logar" icon="ui-icon-locked" ajax="false" action="#{soldierMB.validateSoldier}"/>
+                        <p:commandButton value="Logar" icon="ui-icon-locked" ajax="false" action="#{soldierMB.doLogin}"/>
                         <p:commandButton value="Novo Usuario" icon="ui-icon-person" ajax="false" onclick="varNewUser.show()" />
                         <h:outputText id="display"/>
                 </p:panelGrid>    

@@ -6,11 +6,11 @@ import dao.PersistDB;
 public class AbstractCtrl<T extends PersistDB> {
 
     public void addInfo(String msg) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, "ok"));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, ""));
     }
 
     public void addWarn(String warning) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN , warning, "ok"));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN , warning, ""));
     }
     
     public String nameUpper(String nu){

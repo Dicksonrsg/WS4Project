@@ -8,5 +8,7 @@ public class AvailableDAO extends GenericDAO<Available> {
     public Class<Available> getClassType() {
         return Available.class;
     }
+
+    
     
 }

@@ -3,6 +3,7 @@ package ctrls;
 import model.Teacher;
 import dao.TeacherDAO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -10,8 +11,9 @@ import javax.faces.bean.ManagedBean;
 public class TeacherMBean extends AbstractCtrl<Teacher> implements Serializable{
 	
     private Teacher tea = new Teacher();
-    private String rg = new String();   
-
+    private String rg = new String(); 
+    private List<Teacher> selectedTeas;
+    
     public Teacher getTea() {
         return tea;
     }
@@ -27,6 +29,14 @@ public class TeacherMBean extends AbstractCtrl<Teacher> implements Serializable{
     public void setRg(String rg) {
         this.rg = rg;
     }    
+
+    public List<Teacher> getSelectedTeas() {
+        return selectedTeas;
+    }
+
+    public void setSelectedTeas(List<Teacher> selectedTeas) {
+        this.selectedTeas = selectedTeas;
+    }
     
     public List<Teacher> getListAll(){
         TeacherDAO tdao = new TeacherDAO();
@@ -36,6 +46,20 @@ public class TeacherMBean extends AbstractCtrl<Teacher> implements Serializable{
                 tdao.close();
         }
     }
+    
+    public List<String> getListNames(){
+        TeacherDAO tdao = new TeacherDAO();
+        try{
+           List<String> teachers = new ArrayList<>();
+           for(Teacher teacher : tdao.findAll()){
+               String name = teacher.getName();
+               teachers.add(name);
+           }
+           return teachers;
+        }finally{
+                tdao.close();
+        }
+    }    
 	
     public String save(){
         TeacherDAO tdao = new TeacherDAO();	

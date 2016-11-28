@@ -18,4 +18,11 @@ public class TeacherDAO extends GenericDAO<Teacher>{
     	return teac = (Teacher) que.getSingleResult();
     }
 
+    public Teacher findByName(String name){
+    	Teacher teac = new Teacher();
+    	String jpql = "from tb_teachers where tea_name =" + name;
+    	EntityManager em = getEm();
+    	javax.persistence.Query que = em.createQuery(jpql);
+    	return teac = (Teacher) que.getSingleResult();
+    }    
 }

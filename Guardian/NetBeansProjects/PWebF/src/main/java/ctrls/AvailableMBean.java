@@ -19,7 +19,7 @@ public class AvailableMBean extends AbstractCtrl<Available> implements Serializa
     private Available ava = new Available();
     private Teacher tea = new Teacher();
     private List<Day> dayz = new ArrayList<>();
-    private String rg = new String();
+    private String teacherName = new String();
     private Day da = new Day();
     private List<String> selectedShiftsM, selectedShiftsTu,selectedShiftsW,selectedShiftsTh,selectedShiftsF;
     private Shift shi = new Shift();
@@ -41,13 +41,13 @@ public class AvailableMBean extends AbstractCtrl<Available> implements Serializa
         this.tea = tea;
     }
 
-    public String getRg() {
-        return rg;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setRg(String rg) {
-        this.rg = rg;
-    }  
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
     
     public Day getDa() {
         return da;
@@ -298,28 +298,23 @@ public class AvailableMBean extends AbstractCtrl<Available> implements Serializa
     public String select(Day da){
         this.da = da;
         return null;
-    }   
-    
+    }       
+
     public Teacher findByRG(){
         TeacherDAO tdao = new TeacherDAO();
         try{
-            if(rg != null){
-                if(rg.length() < 4){
-                    System.out.println("Matricula precisa de 4 numeros");
-                }else{
-                    int rg2 = Integer.parseInt(rg);
-                    tea = tdao.findByRG(rg2);
-                }
+            if(teacherName.isEmpty() == false){
+                int rg2 = Integer.parseInt(teacherName);
+                tea = tdao.findByRG(rg2);
             }else{
-                System.out.println("Matricula não pode ser vazia!");
-            }            
+                addWarn("Selecione um professor e click no bt selecionar");
+            }
         }catch(NumberFormatException error){
             System.out.println("Erro: " + error);
         }finally{
-            rg = new String();
             tdao.close();
         }    
         return tea;
     }    
-
+    
 }

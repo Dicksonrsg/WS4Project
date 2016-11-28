@@ -60,7 +60,6 @@ public class SoldierMbean extends AbstractCtrl<Soldier> implements Serializable{
             soldier.setName("Master Administrator");
             king = soldier.getName();
             SessionUtils.getInstance().setAttribute("usuarioLogado", soldier);
-            System.out.println("EUREKA");
             return "/pages/f1w.xhtml?faces-redirect=true";
             
         }else if(sodao.login(user, pass) != null){
@@ -68,7 +67,6 @@ public class SoldierMbean extends AbstractCtrl<Soldier> implements Serializable{
             king = sol.getName();
             System.out.println("USER: " + sol.toString());
             SessionUtils.getInstance().setAttribute("usuarioLogado", sol);
-            System.out.println("EUREKA");
             return "/pages/f1w?faces-redirect=true";
         }else{
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username and Passowrd", "-"));

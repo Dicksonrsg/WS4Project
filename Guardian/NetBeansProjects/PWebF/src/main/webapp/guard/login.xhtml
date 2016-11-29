@@ -27,22 +27,19 @@
                         <p:password value="#{soldierMB.pass}" size="50" >  </p:password>
                         <br/>
                         <p:commandButton value="Logar" icon="ui-icon-locked" ajax="false" action="#{soldierMB.doLogin}"/>
-                        <p:commandButton value="Novo Usuario" icon="ui-icon-person" ajax="false" onclick="varNewUser.show()" />
+                        <p:commandButton value="Novo Usuario" icon="ui-icon-person" type="button" onclick="PF('varNewUser').show();"/>
                         <h:outputText id="display"/>
                 </p:panelGrid>    
             </p:panel>    
         </h:form>
         
-        <h:form>
-            <p:dialog id="NewUser" header="Solicitar acesso" widgetVar="varNewUser" modal="true" showEffect="fade" resizable="false" hideEffect="fade">
+            <p:dialog id="NewUser" header="Solicitar acesso" widgetVar="varNewUser" showEffect="" resizable="false" hideEffect="fade">
                 <p:panelGrid style="border: hidden" columns="1">
                     <p:outputLabel value="Envie mensagem para:"/>
                     <p:outputLabel value="dickson_ranon@hotmail.com" style="font-style: italic" />
                 </p:panelGrid>
-                <p:commandButton value="OK" icon="ui-icon-squaresmall-close" onclick="varNewUser.hide()" />
+                <p:commandButton value="OK" icon="ui-icon-squaresmall-close" onclick="PF('varNewUser').hide();" />
             </p:dialog>
-            
-        </h:form>
         
     </ui:define>
 

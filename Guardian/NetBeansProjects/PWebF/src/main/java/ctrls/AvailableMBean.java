@@ -19,7 +19,7 @@ public class AvailableMBean extends AbstractCtrl<Available> implements Serializa
     private Available ava = new Available();
     private Teacher tea = new Teacher();
     private List<Day> dayz = new ArrayList<>();
-    private String teacherName = new String();
+    private String trg = new String();
     private Day da = new Day();
     private List<String> selectedShiftsM, selectedShiftsTu,selectedShiftsW,selectedShiftsTh,selectedShiftsF;
     private Shift shi = new Shift();
@@ -41,12 +41,12 @@ public class AvailableMBean extends AbstractCtrl<Available> implements Serializa
         this.tea = tea;
     }
 
-    public String getTeacherName() {
-        return teacherName;
+    public String getTrg() {
+        return trg;
     }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
+    public void setTrg(String trg) {
+        this.trg = trg;
     }
     
     public Day getDa() {
@@ -146,6 +146,17 @@ public class AvailableMBean extends AbstractCtrl<Available> implements Serializa
     public void setDayz(List<Day> dayz){
         this.dayz = dayz;
     }
+
+    public void addSaturday(){
+        Day saturday = new Day();
+        List<Shift> sls = new ArrayList<>();
+        Shift seven = new Shift();
+        seven.setGroup("08:00-12:00");
+        sls.add(seven);
+        saturday.setName("Saturday");
+        saturday.setShifts(sls);
+        
+    }
     
     public String save(){
         AvailableDAO adao = new AvailableDAO();
@@ -153,106 +164,106 @@ public class AvailableMBean extends AbstractCtrl<Available> implements Serializa
         ShiftDAO sdao = new ShiftDAO();
         try{
             if(ava.getId() == 0){
-                tea = findByRG();
-                ava.setTeacher(tea);
-                if (selectedShiftsM.isEmpty() == false){                   
-                    try{
-                        List<Shift> shiftM = new ArrayList<>();
-                        for(String group : selectedShiftsM){                           
-                            shi = sdao.searchByGroup(group);
-                            shiftM.add(shi);
-                        }
-                        da.setName("Segunda");
-                        da.setShifts(shiftM);
-                        ddao.create(da);
-                        dayz.add(da);
-                    }catch(Exception error){
-                        System.out.println("Erro: " + error);
-                    }finally{
-                        ddao.close();
-                        sdao.close();
-                        da = new Day();
+                    tea = findByRG();
+                    ava.setTeacher(tea);
+                    if (selectedShiftsM.isEmpty() == false){                   
+                        try{
+                            List<Shift> shiftM = new ArrayList<>();
+                            for(String group : selectedShiftsM){                           
+                                shi = sdao.searchByGroup(group);
+                                shiftM.add(shi);
+                            }
+                            da.setName("Segunda");
+                            da.setShifts(shiftM);
+                            ddao.create(da);
+                            dayz.add(da);
+                        }catch(Exception error){
+                            System.out.println("Erro: " + error);
+                        }finally{
+                            ddao.close();
+                            sdao.close();
+                            da = new Day();
+                        }  
+                    }
+                    if (selectedShiftsTu.isEmpty() == false){                   
+                        try{
+                            List<Shift> shiftTu = new ArrayList<>();
+                            for(String group : selectedShiftsTu){
+                                shi = sdao.searchByGroup(group);
+                                shiftTu.add(shi);
+                            }
+                            da.setName("Terca");
+                            da.setShifts(shiftTu);
+                            ddao.create(da);
+                            dayz.add(da);
+                        }catch(Exception error){
+                            System.out.println("Erro: " + error);
+                        }finally{
+                            ddao.close();
+                            sdao.close();
+                            da = new Day();
+                        }  
+                    }
+                    if (selectedShiftsW.isEmpty() == false){                   
+                        try{
+                            List<Shift> shiftW = new ArrayList<>();
+                            for(String group : selectedShiftsW){
+                                shi = sdao.searchByGroup(group);
+                                shiftW.add(shi);
+                            }
+                            da.setName("Quarta");
+                            da.setShifts(shiftW);
+                            ddao.create(da);
+                            dayz.add(da);
+                        }catch(Exception error){
+                            System.out.println("Erro: " + error);
+                        }finally{
+                            ddao.close();
+                            sdao.close();
+                            da = new Day();
+                        }  
+                    }
+                    if (selectedShiftsTh.isEmpty() == false){                    
+                        try{
+                            List<Shift> shiftTh = new ArrayList<>();
+                            for(String group : selectedShiftsTh){
+                                shi = sdao.searchByGroup(group);
+                                shiftTh.add(shi);
+                            }
+                            da.setName("Quinta");
+                            da.setShifts(shiftTh);
+                            ddao.create(da);
+                            dayz.add(da);
+                        }catch(Exception error){
+                            System.out.println("Erro: " + error);
+                        }finally{
+                            ddao.close();
+                            sdao.close();
+                            da = new Day();
+                        }  
                     }  
-                }
-                if (selectedShiftsTu.isEmpty() == false){                   
-                    try{
-                        List<Shift> shiftTu = new ArrayList<>();
-                        for(String group : selectedShiftsTu){
-                            shi = sdao.searchByGroup(group);
-                            shiftTu.add(shi);
-                        }
-                        da.setName("Terca");
-                        da.setShifts(shiftTu);
-                        ddao.create(da);
-                        dayz.add(da);
-                    }catch(Exception error){
-                        System.out.println("Erro: " + error);
-                    }finally{
-                        ddao.close();
-                        sdao.close();
-                        da = new Day();
-                    }  
-                }
-                if (selectedShiftsW.isEmpty() == false){                   
-                    try{
-                        List<Shift> shiftW = new ArrayList<>();
-                        for(String group : selectedShiftsW){
-                            shi = sdao.searchByGroup(group);
-                            shiftW.add(shi);
-                        }
-                        da.setName("Quarta");
-                        da.setShifts(shiftW);
-                        ddao.create(da);
-                        dayz.add(da);
-                    }catch(Exception error){
-                        System.out.println("Erro: " + error);
-                    }finally{
-                        ddao.close();
-                        sdao.close();
-                        da = new Day();
-                    }  
-                }
-                if (selectedShiftsTh.isEmpty() == false){                    
-                    try{
-                        List<Shift> shiftTh = new ArrayList<>();
-                        for(String group : selectedShiftsTh){
-                            shi = sdao.searchByGroup(group);
-                            shiftTh.add(shi);
-                        }
-                        da.setName("Quinta");
-                        da.setShifts(shiftTh);
-                        ddao.create(da);
-                        dayz.add(da);
-                    }catch(Exception error){
-                        System.out.println("Erro: " + error);
-                    }finally{
-                        ddao.close();
-                        sdao.close();
-                        da = new Day();
-                    }  
-                }  
-                if (selectedShiftsF.isEmpty() == false){                   
-                    try{
-                        List<Shift> shiftF = new ArrayList<>();
-                        for(String group : selectedShiftsF){
-                            shi = sdao.searchByGroup(group);
-                            shiftF.add(shi);
-                        }
-                        da.setName("Sexta");
-                        da.setShifts(shiftF);
-                        ddao.create(da);
-                        dayz.add(da);
-                    }catch(Exception error){
-                        System.out.println("Erro: " + error);
-                    }finally{
-                        ddao.close();
-                        sdao.close();
-                        da = new Day();
-                    }  
-                }
-                addInfo("Salvo com Sucesso");
-                ava.setDays(dayz);
-                adao.create(ava);
+                    if (selectedShiftsF.isEmpty() == false){                   
+                        try{
+                            List<Shift> shiftF = new ArrayList<>();
+                            for(String group : selectedShiftsF){
+                                shi = sdao.searchByGroup(group);
+                                shiftF.add(shi);
+                            }
+                            da.setName("Sexta");
+                            da.setShifts(shiftF);
+                            ddao.create(da);
+                            dayz.add(da);
+                        }catch(Exception error){
+                            System.out.println("Erro: " + error);
+                        }finally{
+                            ddao.close();
+                            sdao.close();
+                            da = new Day();
+                        }  
+                    }
+                    addInfo("Salvo com Sucesso");
+                    ava.setDays(dayz);
+                    adao.create(ava);
             }else{
                 addInfo("Cadastrado atualizado!");
                 adao.update(ava);
@@ -303,8 +314,8 @@ public class AvailableMBean extends AbstractCtrl<Available> implements Serializa
     public Teacher findByRG(){
         TeacherDAO tdao = new TeacherDAO();
         try{
-            if(teacherName.isEmpty() == false){
-                int rg2 = Integer.parseInt(teacherName);
+            if(trg.isEmpty() == false){
+                int rg2 = Integer.parseInt(trg);
                 tea = tdao.findByRG(rg2);
             }else{
                 addWarn("Selecione um professor e click no bt selecionar");

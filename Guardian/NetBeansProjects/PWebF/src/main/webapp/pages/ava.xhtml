@@ -19,113 +19,105 @@
                     <p:panelGrid style="margin-bottom:10px" >
                     <br/>
                     <h:outputLabel for="menuT" value="Professor:" />
-                    <p:selectOneMenu id="menuT" value="#{avaMBean.teacherName}" label="Professores" effect="fold"
+                    <p:selectOneMenu id="menuT" value="#{avaMBean.trg}" label="Professores" effect="fold"
                                           filter="true" filterMatchMode="startsWith" >
                         <f:selectItem itemLabel="Select One" itemValue=""/>
                         <f:selectItems var="teacher" value="#{teacherMBean.listAll}" itemLabel="#{teacher.name}" itemValue="#{teacher.rg}"/>
                     </p:selectOneMenu>
-                    <p:commandButton value="Selecionar" action="#{avaMBean.findByRG}" update="teacher" ajax="false"/>
                     <br/>
-                        
-                    <h:outputLabel value="Selected:" for="teacher" />
-                    <p:dataList value="#{avaMBean.tea.name}" id="teacher" var="teacher" emptyMessage="Nenhum professor selecionado" >
-                        <h:outputText value="#{teacher}" style="font-weight: bold" />
-                    </p:dataList>
                     </p:panelGrid>
                     
-                    <p:panel>
-                        <p:outputLabel value="Segunda-Feira" style="font-weight: bold;"/>
-                        <p:panelGrid columns="2" style="margin-bottom:10px" >                            
-                            <h:outputText value="Horarios:" />
-                            <p:selectManyButton value="#{avaMBean.selectedShiftsM}">
-                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
-                            </p:selectManyButton>
-
-                            <p:commandButton value="Submit" update="displayM" icon="ui-icon-check" />
-                            <p:spacer />
-
-                            <h:outputText value="Selected:" />
-                            <p:dataList id="displayM" value="#{avaMBean.selectedShiftsM}" var="M" emptyMessage="Nenhum horario selecionado">
-                                <h:outputText value="#{M}" style="font-weight: bold" />
-                            </p:dataList>
-                        </p:panelGrid>                        
-                    </p:panel>
+                    <p:panelMenu style=" width: 810px;">
+                        <p:submenu label="Segunda-Feira" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar">                            
+                                <h:outputText value="Horarios:" />
+                                <br/>
+                                <p:selectManyButton value="#{avaMBean.selectedShiftsM}">
+                                    <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                                </p:selectManyButton>                            
+                                <p:commandButton value="Submit" update="displayM" icon="ui-icon-check" />
+                                <br/>
+                                <p:spacer />
+                                <h:outputText value="Selected:" />
+                                <p:dataList id="displayM" value="#{avaMBean.selectedShiftsM}" var="M" emptyMessage="Nenhum horario selecionado">
+                                    <h:outputText value="#{M}" style="font-weight: bold" />
+                                </p:dataList>
+                            </p:menuitem>
+                        </p:submenu>
                     
                     
-                    <p:panel>
-                        <p:outputLabel value="Terça-Feira" style="font-weight: bold;"/>
-                        <p:panelGrid columns="2" style="margin-bottom:10px" >                            
-                            <h:outputText value="Horarios:" />
-                            <p:selectManyButton value="#{avaMBean.selectedShiftsTu}">
-                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
-                            </p:selectManyButton>
-
-                            <p:commandButton value="Submit" update="displayTu" icon="ui-icon-check" />
-                            <p:spacer />
-
-                            <h:outputText value="Selected:" />
-                            <p:dataList id="displayTu" value="#{avaMBean.selectedShiftsTu}" var="Tu" emptyMessage="Nenhum horario selecionado">
-                                <h:outputText value="#{Tu}" style="font-weight: bold" />
-                            </p:dataList>
-                        </p:panelGrid>                     
+                        <p:submenu label="Terça-Feira" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar">                            
+                                <h:outputText value="Horarios:" />
+                                <br/>
+                                <p:selectManyButton value="#{avaMBean.selectedShiftsTu}">
+                                    <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                                </p:selectManyButton>
+                                <p:commandButton value="Submit" update="displayTu" icon="ui-icon-check" />
+                                <br/>
+                                <p:spacer />
+                                <h:outputText value="Selected:" />
+                                <p:dataList id="displayTu" value="#{avaMBean.selectedShiftsTu}" var="Tu" emptyMessage="Nenhum horario selecionado">
+                                    <h:outputText value="#{Tu}" style="font-weight: bold" />
+                                </p:dataList>
+                            </p:menuitem>  
+                        </p:submenu>
+                       
+                        <p:submenu label="Quarta-Feira" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar">                            
+                                <h:outputText value="Horarios:" />
+                                <br/>
+                                <p:selectManyButton value="#{avaMBean.selectedShiftsW}">
+                                    <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                                </p:selectManyButton>
+                                <p:commandButton value="Submit" update="displayw" icon="ui-icon-check" />
+                                <br/>
+                                <p:spacer />
+                                <h:outputText value="Selected:" />
+                                <p:dataList id="displayw" value="#{avaMBean.selectedShiftsW}" var="W" emptyMessage="Nenhum horario selecionado">
+                                    <h:outputText value="#{W}" style="font-weight: bold" />
+                                </p:dataList>
+                            </p:menuitem>
+                        </p:submenu>                      
                         
-                    </p:panel>
+                        <p:submenu label="Quinta-Feira" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar">                            
+                                <h:outputText value="Horarios:" />
+                                <br/>
+                                <p:selectManyButton value="#{avaMBean.selectedShiftsTh}">
+                                    <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                                </p:selectManyButton>
+                                <p:commandButton value="Submit" update="displayth" icon="ui-icon-check" />
+                                <br/>
+                                <p:spacer/>
+                                <h:outputText value="Selected:" />
+                                <p:dataList id="displayth" value="#{avaMBean.selectedShiftsTh}" var="Th" emptyMessage="Nenhum horario selecionado">
+                                    <h:outputText value="#{Th}" style="font-weight: bold" />
+                                </p:dataList>
+                            </p:menuitem>
+                        </p:submenu>    
 
-                    <p:panel>
-                        <p:outputLabel value="Quarta-Feira" style="font-weight: bold;"/>
-                        <p:panelGrid columns="2" style="margin-bottom:10px" >                            
-                            <h:outputText value="Horarios:" />
-                            <p:selectManyButton value="#{avaMBean.selectedShiftsW}">
-                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
-                            </p:selectManyButton>
-
-                            <p:commandButton value="Submit" update="displayw" icon="ui-icon-check" />
-                            <p:spacer />
-
-                            <h:outputText value="Selected:" />
-                            <p:dataList id="displayw" value="#{avaMBean.selectedShiftsW}" var="W" emptyMessage="Nenhum horario selecionado">
-                                <h:outputText value="#{W}" style="font-weight: bold" />
-                            </p:dataList>
-                        </p:panelGrid>                     
+                        <p:submenu label="Sexta-Feira" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar">                            
+                                <h:outputText value="Horarios:" />
+                                <br/>
+                                <p:selectManyButton value="#{avaMBean.selectedShiftsF}">
+                                    <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                                </p:selectManyButton>
+                                <p:commandButton value="Submit" update="displayf" icon="ui-icon-check" />
+                                <br/>
+                                <p:spacer />
+                                <h:outputText value="Selected:" />
+                                <p:dataList id="displayf" value="#{avaMBean.selectedShiftsF}" var="F" emptyMessage="Nenhum horario selecionado">
+                                    <h:outputText value="#{F}" style="font-weight: bold" />
+                                </p:dataList>
+                            </p:menuitem>
+                        </p:submenu> 
                         
-                    </p:panel>
-
-                    <p:panel>
-                        <p:outputLabel value="Quinta-Feira" style="font-weight: bold;"/>
-                        <p:panelGrid columns="2" style="margin-bottom:10px" >                            
-                            <h:outputText value="Horarios:" />
-                            <p:selectManyButton value="#{avaMBean.selectedShiftsTh}">
-                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
-                            </p:selectManyButton>
-
-                            <p:commandButton value="Submit" update="displayth" icon="ui-icon-check" />
-                            <p:spacer />
-
-                            <h:outputText value="Selected:" />
-                            <p:dataList id="displayth" value="#{avaMBean.selectedShiftsTh}" var="Th" emptyMessage="Nenhum horario selecionado">
-                                <h:outputText value="#{Th}" style="font-weight: bold" />
-                            </p:dataList>
-                        </p:panelGrid>                     
-                        
-                    </p:panel>                   
-
-                    <p:panel>
-                        <p:outputLabel value="Sexta-Feira" style="font-weight: bold;"/>
-                        <p:panelGrid columns="2" style="margin-bottom:10px" >                            
-                            <h:outputText value="Horarios:" />
-                            <p:selectManyButton value="#{avaMBean.selectedShiftsF}">
-                                <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
-                            </p:selectManyButton>
-
-                            <p:commandButton value="Submit" update="displayf" icon="ui-icon-check" />
-                            <p:spacer />
-
-                            <h:outputText value="Selected:" />
-                            <p:dataList id="displayf" value="#{avaMBean.selectedShiftsF}" var="F" emptyMessage="Nenhum horario selecionado">
-                                <h:outputText value="#{F}" style="font-weight: bold" />
-                            </p:dataList>
-                        </p:panelGrid> 
-                    </p:panel>   
+                        <p:submenu label="Sabado" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar" value="08:00-12:00" />
+                        </p:submenu>
+                    </p:panelMenu>   
                         <p:commandButton value="SALVAR" update="tva" icon="ui-icon-disk" action="#{avaMBean.save}" ajax="false"/>
                         
                 </h:form>

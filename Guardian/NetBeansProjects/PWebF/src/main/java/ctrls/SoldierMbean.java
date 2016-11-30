@@ -53,14 +53,14 @@ public class SoldierMbean extends AbstractCtrl<Soldier> implements Serializable{
     
     public String doLogin(){
         SoldierDAO sodao = new SoldierDAO();
-        if(user.equals("adm") && pass.equals("adm")){
+        if(user.equals("adm") && pass.equals("spidey")){
             Soldier soldier = new Soldier();
             soldier.setUser(user);
             soldier.setPassword(pass);
             soldier.setName("Master Administrator");
             king = soldier.getName();
             SessionUtils.getInstance().setAttribute("usuarioLogado", soldier);
-            return "/pages/f1w.xhtml?faces-redirect=true";
+            return "/pages/adm.xhtml?faces-redirect=true";
             
         }else if(sodao.login(user, pass) != null){
             Soldier sol = sodao.login(user, pass);

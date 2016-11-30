@@ -10,6 +10,7 @@
     <ui:define name="titulo" >Disponibilidade - </ui:define>
     <ui:define name="link"> <p:commandLink value="Inicio" action="f1w"/> </ui:define>
     <ui:define name="loggedUser" > Usuario: <h:outputText value="#{soldierMB.king}" style="font-weight: bold"/> </ui:define>
+    <ui:define name="leave"><p:commandLink value="SAIR" action="#{soldierMB.doLogout}"/></ui:define>
     <ui:define name="conteudo">
         <p:tabView id="tva">
             
@@ -115,7 +116,8 @@
                         </p:submenu> 
                         
                         <p:submenu label="Sabado" style="font-weight: bold;">
-                            <p:menuitem icon="ui-icon-calendar" value="08:00-12:00" />
+                            <p:menuitem icon="ui-icon-calendar" value="08:00-12:00" actionListener="#{avaMBean.addSaturday}"/>
+                            <p:menuitem icon="ui-icon-trash" value="Remover Sabado" actionListener="#{avaMBean.delSaturday}"/>
                         </p:submenu>
                     </p:panelMenu>   
                         <p:commandButton value="SALVAR" update="tva" icon="ui-icon-disk" action="#{avaMBean.save}" ajax="false"/>

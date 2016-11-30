@@ -1,12 +1,289 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core" 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui"
+    template="/templates/template.xhtml"
+    class="style">
+    <ui:define name="titulo" >Black hole - </ui:define>
+    <ui:define name="link"> <p:commandLink value="Inicio" action="f1w"/> </ui:define>
+    <ui:define name="loggedUser" > User: <h:outputText value="#{soldierMB.king}" style="font-weight: bold"/> </ui:define>
+    <ui:define name="leave"><p:commandLink value="SAIR" action="#{soldierMB.doLogout}"/></ui:define>
+    <ui:define name="conteudo">
+        <p:tabView id="tvad">
+            
+            <p:tab title="Register available">
+                <h:form>
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                    <p:panelGrid style="margin-bottom:10px" >
+                    <br/>
+                    <h:outputLabel for="mT" value="Professor:" />
+                    <p:selectOneMenu id="mT" value="#{avaMBean.trg}" label="Professores" effect="fold"
+                                          filter="true" filterMatchMode="startsWith" >
+                        <f:selectItem itemLabel="Select One" itemValue=""/>
+                        <f:selectItems var="teacher" value="#{teacherMBean.listAll}" itemLabel="#{teacher.name}" itemValue="#{teacher.rg}"/>
+                    </p:selectOneMenu>
+                    <br/>
+                    </p:panelGrid>
+                    
+                    <p:panelMenu style=" width: 810px;">
+                        <p:submenu label="Segunda-Feira" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar">                            
+                                <h:outputText value="Horarios:" />
+                                <br/>
+                                <p:selectManyButton value="#{avaMBean.selectedShiftsM}">
+                                    <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                                </p:selectManyButton>                            
+                                <p:commandButton value="Submit" update="dM" icon="ui-icon-check" />
+                                <br/>
+                                <p:spacer />
+                                <h:outputText value="Selected:" />
+                                <p:dataList id="dM" value="#{avaMBean.selectedShiftsM}" var="M" emptyMessage="Nenhum horario selecionado">
+                                    <h:outputText value="#{M}" style="font-weight: bold" />
+                                </p:dataList>
+                            </p:menuitem>
+                        </p:submenu>
+                    
+                    
+                        <p:submenu label="Terça-Feira" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar">                            
+                                <h:outputText value="Horarios:" />
+                                <br/>
+                                <p:selectManyButton value="#{avaMBean.selectedShiftsTu}">
+                                    <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                                </p:selectManyButton>
+                                <p:commandButton value="Submit" update="dTu" icon="ui-icon-check" />
+                                <br/>
+                                <p:spacer />
+                                <h:outputText value="Selected:" />
+                                <p:dataList id="dTu" value="#{avaMBean.selectedShiftsTu}" var="Tu" emptyMessage="Nenhum horario selecionado">
+                                    <h:outputText value="#{Tu}" style="font-weight: bold" />
+                                </p:dataList>
+                            </p:menuitem>  
+                        </p:submenu>
+                       
+                        <p:submenu label="Quarta-Feira" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar">                            
+                                <h:outputText value="Horarios:" />
+                                <br/>
+                                <p:selectManyButton value="#{avaMBean.selectedShiftsW}">
+                                    <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                                </p:selectManyButton>
+                                <p:commandButton value="Submit" update="dW" icon="ui-icon-check" />
+                                <br/>
+                                <p:spacer />
+                                <h:outputText value="Selected:" />
+                                <p:dataList id="dW" value="#{avaMBean.selectedShiftsW}" var="W" emptyMessage="Nenhum horario selecionado">
+                                    <h:outputText value="#{W}" style="font-weight: bold" />
+                                </p:dataList>
+                            </p:menuitem>
+                        </p:submenu>                      
+                        
+                        <p:submenu label="Quinta-Feira" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar">                            
+                                <h:outputText value="Horarios:" />
+                                <br/>
+                                <p:selectManyButton value="#{avaMBean.selectedShiftsTh}">
+                                    <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                                </p:selectManyButton>
+                                <p:commandButton value="Submit" update="dTh" icon="ui-icon-check" />
+                                <br/>
+                                <p:spacer/>
+                                <h:outputText value="Selected:" />
+                                <p:dataList id="dTh" value="#{avaMBean.selectedShiftsTh}" var="Th" emptyMessage="Nenhum horario selecionado">
+                                    <h:outputText value="#{Th}" style="font-weight: bold" />
+                                </p:dataList>
+                            </p:menuitem>
+                        </p:submenu>    
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+                        <p:submenu label="Sexta-Feira" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar">                            
+                                <h:outputText value="Horarios:" />
+                                <br/>
+                                <p:selectManyButton value="#{avaMBean.selectedShiftsF}">
+                                    <f:selectItems var="shift" value="#{shiftMBean.listAll}" itemLabel="#{shift.group}" itemValue="#{shift.group}" />
+                                </p:selectManyButton>
+                                <p:commandButton value="Submit" update="dF" icon="ui-icon-check" />
+                                <br/>
+                                <p:spacer />
+                                <h:outputText value="Selected:" />
+                                <p:dataList id="dF" value="#{avaMBean.selectedShiftsF}" var="F" emptyMessage="Nenhum horario selecionado">
+                                    <h:outputText value="#{F}" style="font-weight: bold" />
+                                </p:dataList>
+                            </p:menuitem>
+                        </p:submenu> 
+                        
+                        <p:submenu label="Sabado" style="font-weight: bold;">
+                            <p:menuitem icon="ui-icon-calendar" value="08:00-12:00" actionListener="#{avaMBean.addSaturday}"/>
+                            <p:menuitem icon="ui-icon-trash" value="Remover Sabado" actionListener="#{avaMBean.delSaturday}"/>
+                        </p:submenu>
+                    </p:panelMenu>   
+                        <p:commandButton value="SALVAR" update="tvad" icon="ui-icon-disk" action="#{avaMBean.save}" ajax="false"/>
+                        
+                </h:form>
+                
+            </p:tab>
+            
+            <p:tab title="List Available">
+                
+                <h:form id="fad2">
+                    
+                    <p:dataTable var="available" value="#{avaMBean.listFull}" scrollable="true" scrollHeight="300" style="width: 98%;" emptyMessage="Nenhuma disponibilidade cadastrada" >
+                        
+                        <p:column headerText="Id" footerText="Id" style="width: 10%;" sortBy="#{available.id}">
+                            <h:outputText value="#{available.id}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Professor" footerText="Professor" style="width: 30%;" sortBy="#{available.teacher.name}" filterBy="#{available.teacher.name}" >
+                            <h:outputText value="#{available.teacher.name}"/>
+                        </p:column> 
+                        
+                        <p:column headerText="Dia" footerText="Dia" style="width: 10%;" filterBy="#{availale.days}">
+                             
+                            <ui:repeat value="#{available.days}" var="day" >
+                                #{day.name}                              
+                                <ui:repeat value="#{day.shifts}" var="shift">
+                                    #{shift.group}
+                                </ui:repeat>
+                                <br/>
+                            </ui:repeat>                                
+                        </p:column>
+                        
+                        <p:column headerText="Ação" footerText="Ação" style="width: 10%; text-align: center;">
+                            <p:commandButton icon="ui-icon-search" ajax="true" action="#{avaMBean.selectAva(available)}"/>
+                            <p:commandButton icon="ui-icon-trash" ajax="false" update="tvad:fad2" action="#{avaMBean.deleteAva(available)}" onclick="return confirm('Excluir a disponibilidade de #{available.teacher.name} ?')"/>
+                        </p:column>
+                    </p:dataTable>
+                    
+                </h:form>
+            </p:tab>
+            
+            <p:tab title="Register Teacher">
+                <h:form id="ftad1">
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                    <p:panelGrid>
+                        
+                        <h:inputHidden value="#{teacherMBean.tea.id}" />
+                        
+                        <p:outputLabel value="Nome:" />
+                        <br/>
+                        <p:inputText value="#{teacherMBean.tea.name}" 
+                            required="true"         
+                            requiredMessage="Campo nome obrigatório." 
+                            validatorMessage="Campo nome não pode passar de 70 caracteres."
+                            size="50"
+                        >
+                            <f:validateLength maximum="70" />
+                        </p:inputText>
+                        <br/>
+                        <p:outputLabel value="Matricula:" />
+                        <br/>
+                        <p:inputMask 
+                            value="#{teacherMBean.tea.rg}" 
+                            required="true"
+                            requiredMessage="Campo Matricula obrigatório."
+                            validatorMessage="Campo matricula não pode ser vazio."
+                            mask="9999"
+                        >
+                        </p:inputMask>
+                        <br/>
+                        <br/>
+				        <p:outputLabel for="idioma" value="Idioma:" />
+				        <p:selectOneMenu id="idioma" value="#{teacherMBean.tea.langauge}" style="width:125px">
+                                            <f:selectItem itemLabel="Select One" itemValue="" />
+				            <f:selectItem itemLabel="Inglês" itemValue="Ingles" />
+				            <f:selectItem itemLabel="Espanhol" itemValue="Espanhol" />
+				            <f:selectItem itemLabel="Italiano" itemValue="Italiano" />
+				            <f:selectItem itemLabel="Alemão" itemValue="Alemao" />
+				        </p:selectOneMenu>
+                        <br/><br/>
+                       <p:outputLabel value="Telefone:" />
+                        <br/>                       
+                        <p:inputMask 
+                            value="#{teacherMBean.tea.phone}" 
+                            mask="(99)9999-9999"
+                            required="true"
+                            requiredMessage="CAmpo telefone obrigatorio."
+                        >
+                        </p:inputMask>
+                        <br/>
+                        <h:outputText id="display" />
+                        <br/>
+                        <p:commandButton value="SALVAR" icon="ui-icon-disk" ajax="false" update="tv" action="#{teacherMBean.save()}" />
+                        
+                    </p:panelGrid>
+                    
+                </h:form>                
+            </p:tab>
+            
+            <p:tab title="Teacher's list">
+                <h:form id="ftad2">
+                    
+                    <p:dataTable var="teacher" value="#{teacherMBean.listAll}" scrollable="true" scrollHeight="300" style="width: 99%;">
+                    
+                        <p:column headerText="Id" footerText="Id" style="width: 10%;" >
+                            <h:outputText value="#{teacher.id}" />
+                        </p:column>
+
+                        <p:column headerText="Nome" footerText="Nome" filterBy="#{teacher.name}" style="width: 40%;"> 
+                            <h:outputText value="#{teacher.name}" />
+                        </p:column>
+
+                        <p:column headerText="Matricula" footerText="Matricula" filterBy="#{teacher.rg}" style="width: 20%;">
+                            <h:outputText value="#{teacher.rg}" />
+                        </p:column>
+                        <p:column headerText="Idioma" footerText="Idioma"  filterBy="#{teacher.langauge}" style="width: 20%;">
+                            <h:outputText  value="#{teacher.langauge}" />
+                        </p:column>
+                        <p:column headerText="Telefone" footerText="Telefone"  style="width: 20%;">
+                            <h:outputText  value="#{teacher.phone}" />
+                        </p:column>                        
+                        <p:column headerText="Ação" footerText="Ação" style="width: 10%; text-align: center;">
+                            <p:commandButton icon="ui-icon-search" ajax="false" action="#{teacherMBean.select(teacher)}" />
+                            <p:commandButton icon="ui-icon-trash" ajax="false" update="tvad:ftad2" action="#{teacherMBean.delete(teacher)}" onclick="return confirm('Excluir #{teacher.name} ?')" />   
+                        </p:column>
+                    
+                    </p:dataTable>
+                    
+                </h:form>                
+            </p:tab>
+            
+            <p:tab title="Register Shifts">
+                <h:form id="fsad1">
+                    <p:panelGrid>
+                        <h:inputHidden value="#{shiftMBean.shi.id}" />
+                        <p:outputLabel value="Shift:" />
+                        <br/>
+                        <p:inputText value="#{shiftMBean.shi.group}" size="30"/>
+                        <br/>
+                        <h:outputText id="display" />
+                        <br/>
+                        <p:commandButton value="SALVAR" icon="ui-icon-disk" ajax="true" update="tvad:fsad2" action="#{shiftMBean.save()}"/>
+                    </p:panelGrid>
+                </h:form>
+            </p:tab> 
+            
+            <p:tab title="Shifts' list">
+                <h:form id="fsad2">
+                    <p:dataTable var="shift" value="#{shiftMBean.listAll}" scrollable="true" scrollHeight="300" style="width: 99%;">
+                        <p:column headerText="Id" footerText="Id" style="width: 10%;" >
+                            <h:outputText value="#{shift.id}" />
+                        </p:column>
+
+                        <p:column headerText="Id" footerText="Id" style="width: 50%;" >
+                            <h:outputText value="#{shift.group}" />
+                        </p:column>   
+
+                        <p:column headerText="Ação" footerText="Ação" style="width: 10%; text-align: center;">
+                            <p:commandButton icon="ui-icon-trash" ajax="false" update="tvad:f2" action="#{shiftMBean.delete(shift)}" onclick="return confirm('Excluir #{shift.group} ?')" />   
+                        </p:column>                    
+                    </p:dataTable>
+                </h:form>    
+            </p:tab>
+        </p:tabView>
+        
+    </ui:define>      
+    
+</ui:composition>

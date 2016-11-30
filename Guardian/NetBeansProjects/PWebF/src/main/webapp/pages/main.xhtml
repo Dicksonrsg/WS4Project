@@ -11,6 +11,7 @@
     <ui:define name="titulo" >Professor - </ui:define>
     <ui:define name="link"> <p:commandLink value="Inicio" action="f1w"/> </ui:define>
     <ui:define name="loggedUser" > Usuario: <h:outputText value="#{soldierMB.king}" style="font-weight: bold"/> </ui:define>
+    <ui:define name="leave"><p:commandLink value="SAIR" action="#{soldierMB.doLogout}"/></ui:define>
     <ui:define name="conteudo">
         <p:tabView id="tv">
                
@@ -106,20 +107,6 @@
                     
                 </h:form>
                 
-            </p:tab>
-            <p:tab title="Temp tab for shifts">
-                <h:form>
-                    <p:panelGrid>
-                        <h:inputHidden value="#{shiftMBean.shi.id}" />
-                        <p:outputLabel value="Shift:" />
-                        <br/>
-                        <p:inputText value="#{shiftMBean.shi.group}" size="30"/>
-                        <br/>
-                        <h:outputText id="display" />
-                        <br/>
-                        <p:commandButton value="SALVAR" icon="ui-icon-disk" ajax="true" action="#{shiftMBean.save()}"/>
-                    </p:panelGrid>
-                </h:form>
             </p:tab>
                 
         </p:tabView>

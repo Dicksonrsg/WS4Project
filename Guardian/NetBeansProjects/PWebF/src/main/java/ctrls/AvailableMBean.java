@@ -155,7 +155,13 @@ public class AvailableMBean extends AbstractCtrl<Available> implements Serializa
         sls.add(seven);
         saturday.setName("Saturday");
         saturday.setShifts(sls);
-        
+        dayz.add(saturday);
+        for(Day z : dayz){System.out.println("here: " + z.toString());}
+    }
+    
+    public void delSaturday(){
+        String sat = "Saturday";
+        dayz.removeIf(p -> p.getName().equals(sat));
     }
     
     public String save(){

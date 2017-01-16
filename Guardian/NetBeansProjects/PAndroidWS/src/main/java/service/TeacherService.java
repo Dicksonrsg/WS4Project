@@ -22,21 +22,21 @@ public class TeacherService {
     
     @GET
     @Path("/search")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Teacher> buscarTodos(){
         return tdao.findAll();
     }
     
     @GET
     @Path("/searchby/{id}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public Teacher buscarId(@PathParam("id") int id){
         return tdao.findByPrimaryKey(id);
     }   
     
     @POST
     @Path("/register")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_JSON})
     public Response cadastrar(Teacher teacher){
         try{
             tdao.create(teacher);
@@ -49,7 +49,7 @@ public class TeacherService {
     
     @PUT
     @Path("/edit")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_JSON})
     public Response alterar(Teacher teacher){
         try{
             tdao.update(teacher);

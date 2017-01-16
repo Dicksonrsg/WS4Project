@@ -21,14 +21,14 @@ public class TeacherService {
     private final TeacherDAO tdao = new TeacherDAO();
     
     @GET
-    @Path("/find")
+    @Path("/search")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<Teacher> buscarTodos(){
         return tdao.findAll();
     }
     
     @GET
-    @Path("/findby/{id}")
+    @Path("/searchby/{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Teacher buscarId(@PathParam("id") int id){
         return tdao.findByPrimaryKey(id);

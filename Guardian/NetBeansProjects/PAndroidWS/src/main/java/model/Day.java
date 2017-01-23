@@ -2,48 +2,36 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name = "tb_teachers")
-//@XmlRootElement
-public class Teacher implements Serializable{
- 
+@Table(name = "tb_days")
+public class Day implements Serializable{
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tea_id")
+    @Column(name = "day_id") 
     private int id;
-    @Column(name = "tea_name")
+    @Column(name = "day_name")
     private String name;
-    @Column(name = "tea_rg")
-    private int rg;
-    @Column(name = "tea_lang")
-    private String language;    
-    @Column(name = "tea_phone")
-    private String phone;
+    @ManyToMany
+    @JoinColumn(name = "day_shi_id")
+    private List<Shift> shifts;
 
-    public Teacher() {
+    public Day() {
     }
 
-    public Teacher(String name, int rg, String language, String phone) {
+    public Day(String name, List<Shift> shifts) {
         this.name = name;
-        this.rg = rg;
-        this.language = language;
-        this.phone = phone;
-    }
-
-    public int getRg() {
-        return rg;
-    }
-
-    public void setRg(int rg) {
-        this.rg = rg;
+        this.shifts = shifts;
     }
 
     public int getId() {
@@ -62,31 +50,23 @@ public class Teacher implements Serializable{
         this.name = name;
     }
 
-    public String getLanguage() {
-        return language;
+    public List<Shift> getShifts() {
+        return shifts;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setShifts(List<Shift> shifts) {
+        this.shifts = shifts;
     }
 
     @Override
     public String toString() {
-        return "Teacher{" + "id=" + id + ", name=" + name + ", rg=" + rg + ", language=" + language + ", phone=" + phone + '}';
+        return "Day{" + "id=" + id + ", name=" + name + ", shifts=" + shifts + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.id;
+        int hash = 5;
+        hash = 89 * hash + this.id;
         return hash;
     }
 
@@ -101,7 +81,7 @@ public class Teacher implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Teacher other = (Teacher) obj;
+        final Day other = (Day) obj;
         if (this.id != other.id) {
             return false;
         }

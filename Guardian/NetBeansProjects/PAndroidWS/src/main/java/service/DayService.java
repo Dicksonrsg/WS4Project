@@ -1,7 +1,7 @@
 
 package service;
 
-import dao.TeacherDAO;
+import dao.DayDAO;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -13,34 +13,34 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import model.Teacher;
+import model.Day;
 
-@Path("/teacher")
-public class TeacherService {
- 
-    private final TeacherDAO tdao = new TeacherDAO();
+@Path("/day")
+public class DayService {
+    
+    private final DayDAO ddao = new DayDAO();
     
     @GET
     @Path("/search")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Teacher> listAll(){
-        return tdao.findAll();
+    public List<Day> listAll(){
+        return ddao.findAll();
     }
     
     @GET
     @Path("/search/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Teacher findById(@PathParam("id") int id){
-        return tdao.findByPrimaryKey(id);
-    }   
+    public Day findById(@PathParam("id")int id){
+        return ddao.findByPrimaryKey(id);
+    }
     
     @POST
     @Path("/register")
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response register(Teacher teacher){
+    public Response register(Day day){
         try{
-            tdao.create(teacher);
-            return Response.status(200).entity("Professor cadastrado").build();
+            ddao.create(day);
+            return Response.status(200).entity("Dia cadastrada").build();
         }catch(Exception e){
             System.out.println("Erro: " + e.toString());
         }
@@ -50,32 +50,25 @@ public class TeacherService {
     @PUT
     @Path("/edit")
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response edit(Teacher teacher){
+    public Response edit(Day day){
         try{
-            tdao.update(teacher);
-            return Response.status(200).entity("Professor editado").build();
+            ddao.update(day);
+            return Response.status(200).entity("Dia editado").build();
         }catch(Exception e){
             System.out.println("Erro: " + e.toString());
         }
-        return Response.status(500).entity("Falha na alteração").build();        
+        return Response.status(500).entity("Falha na edição").build();        
     }
     
     @DELETE
     @Path("/delete/{id}")
-    public Response delete(@PathParam("id") int id){
+    public Response delete(@PathParam("id")int id){
         try{
-            tdao.delete(tdao.findByPrimaryKey(id));
+            ddao.delete(ddao.findByPrimaryKey(id));
             return Response.status(200).entity("Professor excluido").build();
         }catch(Exception e){
             System.out.println("Erro: " + e.toString());
         }
-        return Response.status(500).entity("Falha ao excluir").build();        
+        return Response.status(500).entity("Falha na edição").build();
     }
 }
-
-/* CRUD --> SERVICE
-    Create -> Post
-    Read -> GET
-    Update -> PUT
-    Delete -> DELETE
-*/

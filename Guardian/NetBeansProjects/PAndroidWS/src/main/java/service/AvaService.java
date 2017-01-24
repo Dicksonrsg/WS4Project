@@ -35,7 +35,7 @@ public class AvaService {
     }  
     
     @POST
-    @Path("/register/")
+    @Path("/register")
     @Consumes({MediaType.APPLICATION_JSON})
     public Response register(Available ava){
         try{

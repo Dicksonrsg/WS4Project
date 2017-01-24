@@ -1,7 +1,7 @@
 
 package service;
 
-import dao.TeacherDAO;
+import dao.ShiftDAO;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -13,34 +13,34 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import model.Teacher;
+import model.Shift;
 
-@Path("/teacher")
-public class TeacherService {
- 
-    private final TeacherDAO tdao = new TeacherDAO();
+@Path("/shift")
+public class ShiftService {
     
+    private final ShiftDAO sdao = new ShiftDAO();
+
     @GET
     @Path("/search")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Teacher> listAll(){
-        return tdao.findAll();
+    public List<Shift> listAll(){
+        return sdao.findAll();
     }
     
     @GET
-    @Path("/search/{id}")
+    @Path("/searchby/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Teacher findById(@PathParam("id") int id){
-        return tdao.findByPrimaryKey(id);
+    public Shift finById(@PathParam("id") int id){
+        return sdao.findByPrimaryKey(id);
     }   
     
     @POST
     @Path("/register")
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response register(Teacher teacher){
+    public Response register(Shift shift){
         try{
-            tdao.create(teacher);
-            return Response.status(200).entity("Professor cadastrado").build();
+            sdao.create(shift);
+            return Response.status(200).entity("Horario cadastrado").build();
         }catch(Exception e){
             System.out.println("Erro: " + e.toString());
         }
@@ -50,10 +50,10 @@ public class TeacherService {
     @PUT
     @Path("/edit")
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response edit(Teacher teacher){
+    public Response edit(Shift shift){
         try{
-            tdao.update(teacher);
-            return Response.status(200).entity("Professor editado").build();
+            sdao.update(shift);
+            return Response.status(200).entity("Horario editado").build();
         }catch(Exception e){
             System.out.println("Erro: " + e.toString());
         }
@@ -64,18 +64,11 @@ public class TeacherService {
     @Path("/delete/{id}")
     public Response delete(@PathParam("id") int id){
         try{
-            tdao.delete(tdao.findByPrimaryKey(id));
-            return Response.status(200).entity("Professor excluido").build();
+            sdao.delete(sdao.findByPrimaryKey(id));
+            return Response.status(200).entity("Horario excluido").build();
         }catch(Exception e){
             System.out.println("Erro: " + e.toString());
         }
         return Response.status(500).entity("Falha ao excluir").build();        
-    }
+    }    
 }
-
-/* CRUD --> SERVICE
-    Create -> Post
-    Read -> GET
-    Update -> PUT
-    Delete -> DELETE
-*/
